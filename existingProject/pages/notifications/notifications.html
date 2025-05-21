@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - FinVerse</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="./notifications.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">FinVerse</div>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="../dashboard/dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../accounts/accounts.html">
+                            <i class="fas fa-wallet"></i>
+                            <span>Accounts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transactions/transactions.html">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transfers/transfers.html">
+                            <i class="fas fa-money-bill-transfer"></i>
+                            <span>Transfers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../bills/bills.html">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Bills</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../loans/loans.html">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Loans</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../credit-score/credit-score.html">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Credit Score</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../kyc/kyc.html">
+                            <i class="fas fa-id-card"></i>
+                            <span>KYC</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../settings/settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../profile/profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../login/login.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search notifications..." id="searchNotifications">
+                </div>
+                <div class="top-nav-right">
+                    <a href="./notifications.html" class="notification-btn active" title="View Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
+                    <div class="user-menu" id="userMenu">
+                        <a href="../profile/profile.html" class="user-menu-link">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar" class="avatar">
+                            <span class="user-name">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown">
+                            <a href="../profile/profile.html">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="../settings/settings.html">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                            <a href="../login/login.html" class="logout-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <div class="header-left">
+                            <h1>Notifications</h1>
+                            <p class="date">Today is <span id="currentDate"></span></p>
+                        </div>
+                        <div class="header-right">
+                            <button class="refresh-btn" title="Refresh Notifications">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Notification Filters -->
+                    <div class="notification-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="unread">Unread</button>
+                        <button class="filter-btn" data-filter="transactions">Transactions</button>
+                        <button class="filter-btn" data-filter="security">Security</button>
+                        <button class="filter-btn" data-filter="system">System</button>
+                    </div>
+
+                    <!-- Notifications List -->
+                    <div class="notifications-list">
+                        <!-- Unread Transaction Notification -->
+                        <div class="notification-item unread" data-type="transactions">
+                            <div class="notification-icon">
+                                <i class="fas fa-money-bill-transfer"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h3>Transfer Successful</h3>
+                                    <span class="notification-time">2 hours ago</span>
+                                </div>
+                                <p>Your transfer of $500 to Jane Smith has been completed successfully.</p>
+                                <div class="notification-actions">
+                                    <button class="action-btn mark-read">Mark as Read</button>
+                                    <button class="action-btn view-details">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Notification -->
+                        <div class="notification-item" data-type="security">
+                            <div class="notification-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h3>Security Alert</h3>
+                                    <span class="notification-time">5 hours ago</span>
+                                </div>
+                                <p>New login detected from a new device. Please verify if this was you.</p>
+                                <div class="notification-actions">
+                                    <button class="action-btn verify">Verify Login</button>
+                                    <button class="action-btn report">Report</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- System Notification -->
+                        <div class="notification-item" data-type="system">
+                            <div class="notification-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h3>System Update</h3>
+                                    <span class="notification-time">1 day ago</span>
+                                </div>
+                                <p>New features have been added to your FinVerse account. Check them out!</p>
+                                <div class="notification-actions">
+                                    <button class="action-btn learn-more">Learn More</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Transaction Notification -->
+                        <div class="notification-item" data-type="transactions">
+                            <div class="notification-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h3>Payment Received</h3>
+                                    <span class="notification-time">2 days ago</span>
+                                </div>
+                                <p>You have received a payment of $1,200 from ABC Company.</p>
+                                <div class="notification-actions">
+                                    <button class="action-btn view-details">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Load More Button -->
+                    <div class="load-more">
+                        <button class="load-more-btn">Load More Notifications</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./notifications.js"></script>
+</body>
+</html> 

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounts - FinVerse</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="./accounts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">FinVerse</div>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="../dashboard/dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="../accounts/accounts.html">
+                            <i class="fas fa-wallet"></i>
+                            <span>Accounts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transactions/transactions.html">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transfers/transfers.html">
+                            <i class="fas fa-money-bill-transfer"></i>
+                            <span>Transfers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../bills/bills.html">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Bills</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../loans/loans.html">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Loans</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../credit-score/credit-score.html">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Credit Score</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../kyc/kyc.html">
+                            <i class="fas fa-id-card"></i>
+                            <span>KYC</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../settings/settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../profile/profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../login/login.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search accounts...">
+                </div>
+                <div class="top-nav-right">
+                    <a href="../transactions/transactions.html" class="notification-btn" title="View Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
+                    <div class="user-menu" id="userMenu">
+                        <a href="../profile/profile.html" class="user-menu-link">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar" class="avatar">
+                            <span class="user-name">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown">
+                            <a href="../profile/profile.html">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="../settings/settings.html">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                            <a href="../login/login.html" class="logout-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <section class="dashboard-section">
+                    <h1>My Accounts</h1>
+                    <p class="date"><span id="currentDate"></span></p>
+                    <div class="section-header">
+                        <div class="account-filters">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="savings">Savings</button>
+                            <button class="filter-btn" data-filter="checking">Checking</button>
+                            <button class="filter-btn" data-filter="investment">Investment</button>
+                        </div>
+                        <button class="btn-primary" id="openNewAccountBtn">
+                            <i class="fas fa-plus"></i> Open New Account
+                        </button>
+                    </div>
+
+                    <!-- Account Summary -->
+                    <section class="account-summary">
+                        <div class="summary-card total-balance">
+                            <div class="card-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Total Balance</h3>
+                                <p class="amount">$25,750.00</p>
+                                <p class="change positive">+$1,250.00 this month</p>
+                            </div>
+                        </div>
+                        <div class="summary-card monthly-income">
+                            <div class="card-icon">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Monthly Income</h3>
+                                <p class="amount">$4,500.00</p>
+                                <p class="change positive">+$500.00 from last month</p>
+                            </div>
+                        </div>
+                        <div class="summary-card monthly-expenses">
+                            <div class="card-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Monthly Expenses</h3>
+                                <p class="amount">$2,800.00</p>
+                                <p class="change negative">+$200.00 from last month</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Account Cards -->
+                    <section class="account-cards">
+                        <div class="section-header">
+                            <h2>My Accounts</h2>
+                            <div class="account-filters">
+                                <button class="filter-btn active" data-filter="all">All</button>
+                                <button class="filter-btn" data-filter="savings">Savings</button>
+                                <button class="filter-btn" data-filter="checking">Checking</button>
+                                <button class="filter-btn" data-filter="investment">Investment</button>
+                            </div>
+                        </div>
+                        <div class="cards-grid">
+                            <!-- Savings Account -->
+                            <div class="account-card" data-type="savings" data-account-id="savings-1234">
+                                <div class="card-header">
+                                    <div class="account-type">
+                                        <i class="fas fa-piggy-bank"></i>
+                                        <span>Savings Account</span>
+                                    </div>
+                                    <div class="account-number">**** **** **** 1234</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="balance">
+                                        <span class="label">Available Balance</span>
+                                        <span class="amount">$15,500.00</span>
+                                    </div>
+                                    <div class="interest-rate">
+                                        <span class="label">Interest Rate</span>
+                                        <span class="rate">3.5% APY</span>
+                                    </div>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="action-btn" data-action="view" title="View Details">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                    <button class="action-btn" data-action="transfer" title="Transfer Money">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                    <button class="action-btn" data-action="statement" title="Download Statement">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Checking Account -->
+                            <div class="account-card" data-type="checking" data-account-id="checking-5678">
+                                <div class="card-header">
+                                    <div class="account-type">
+                                        <i class="fas fa-university"></i>
+                                        <span>Checking Account</span>
+                                    </div>
+                                    <div class="account-number">**** **** **** 5678</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="balance">
+                                        <span class="label">Available Balance</span>
+                                        <span class="amount">$8,250.00</span>
+                                    </div>
+                                    <div class="interest-rate">
+                                        <span class="label">Interest Rate</span>
+                                        <span class="rate">0.5% APY</span>
+                                    </div>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="action-btn" data-action="view" title="View Details">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                    <button class="action-btn" data-action="transfer" title="Transfer Money">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                    <button class="action-btn" data-action="statement" title="Download Statement">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Investment Account -->
+                            <div class="account-card" data-type="investment" data-account-id="investment-9012">
+                                <div class="card-header">
+                                    <div class="account-type">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Investment Account</span>
+                                    </div>
+                                    <div class="account-number">**** **** **** 9012</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="balance">
+                                        <span class="label">Portfolio Value</span>
+                                        <span class="amount">$2,000.00</span>
+                                    </div>
+                                    <div class="interest-rate">
+                                        <span class="label">Return Rate</span>
+                                        <span class="rate">+12.5% YTD</span>
+                                    </div>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="action-btn" data-action="view" title="View Details">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                    <button class="action-btn" data-action="transfer" title="Transfer Money">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                    <button class="action-btn" data-action="statement" title="Download Statement">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Recent Transactions -->
+                    <section class="recent-transactions">
+                        <div class="section-header">
+                            <h2>Recent Transactions</h2>
+                            <button class="view-all-btn">View All</button>
+                        </div>
+                        <div class="transactions-list">
+                            <div class="transaction-item">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                                <div class="transaction-details">
+                                    <h4>Grocery Store</h4>
+                                    <p>Today, 2:30 PM</p>
+                                </div>
+                                <div class="transaction-amount negative">
+                                    -$85.50
+                                </div>
+                            </div>
+                            <div class="transaction-item">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-money-bill-transfer"></i>
+                                </div>
+                                <div class="transaction-details">
+                                    <h4>Transfer to Savings</h4>
+                                    <p>Yesterday, 10:15 AM</p>
+                                </div>
+                                <div class="transaction-amount negative">
+                                    -$500.00
+                                </div>
+                            </div>
+                            <div class="transaction-item">
+                                <div class="transaction-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="transaction-details">
+                                    <h4>Salary Deposit</h4>
+                                    <p>Mar 1, 2024</p>
+                                </div>
+                                <div class="transaction-amount positive">
+                                    +$4,500.00
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- New Account Modal -->
+    <div class="modal" id="newAccountModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Open New Account</h2>
+                <button class="close-btn" title="Close Modal">&times;</button>
+            </div>
+            <form id="newAccountForm" class="modal-form">
+                <div class="form-group">
+                    <label for="accountType">Account Type</label>
+                    <select id="accountType" name="accountType" required>
+                        <option value="">Select Account Type</option>
+                        <option value="savings">Savings Account</option>
+                        <option value="checking">Checking Account</option>
+                        <option value="investment">Investment Account</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="initialDeposit">Initial Deposit</label>
+                    <input type="number" id="initialDeposit" name="initialDeposit" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="fundingAccount">Funding Account</label>
+                    <select id="fundingAccount" name="fundingAccount" required>
+                        <option value="">Select Funding Account</option>
+                        <option value="checking-5678">Checking Account (****5678)</option>
+                        <option value="savings-1234">Savings Account (****1234)</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="hideModal('newAccountModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Open Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Account Details Modal -->
+    <div class="modal" id="accountDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Account Details</h2>
+                <button class="close-btn" title="Close Modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="account-details">
+                    <div class="detail-section">
+                        <h3>Account Information</h3>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <span class="label">Account Type</span>
+                                <span class="value" id="detailAccountType"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Account Number</span>
+                                <span class="value" id="detailAccountNumber"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Available Balance</span>
+                                <span class="value" id="detailBalance"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Interest Rate</span>
+                                <span class="value" id="detailInterestRate"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Account Summary</h3>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <span class="label">Opening Date</span>
+                                <span class="value" id="detailOpeningDate"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Last Transaction</span>
+                                <span class="value" id="detailLastTransaction"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Monthly Interest</span>
+                                <span class="value" id="detailMonthlyInterest"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Status</span>
+                                <span class="value" id="detailStatus"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Recent Activity</h3>
+                        <div class="recent-activity-list" id="detailRecentActivity">
+                            <!-- Activity items will be added dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="hideModal('accountDetailsModal')">Close</button>
+                <button class="btn-primary" id="downloadStatementBtn">
+                    <i class="fas fa-download"></i> Download Statement
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./accounts.js"></script>
+</body>
+</html> 

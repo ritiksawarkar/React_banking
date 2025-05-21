@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions - FinVerse</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="./transactions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">FinVerse</div>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="../dashboard/dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../accounts/accounts.html">
+                            <i class="fas fa-wallet"></i>
+                            <span>Accounts</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="../transactions/transactions.html">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transfers/transfers.html">
+                            <i class="fas fa-money-bill-transfer"></i>
+                            <span>Transfers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../bills/bills.html">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Bills</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../loans/loans.html">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Loans</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../credit-score/credit-score.html">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Credit Score</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../kyc/kyc.html">
+                            <i class="fas fa-id-card"></i>
+                            <span>KYC</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../settings/settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../profile/profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../login/login.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search transactions..." id="searchTransactions">
+                </div>
+                <div class="top-nav-right">
+                    <a href="../transactions/transactions.html" class="notification-btn" title="View Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
+                    <div class="user-menu" id="userMenu">
+                        <a href="../profile/profile.html" class="user-menu-link">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar" class="avatar">
+                            <span class="user-name">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown">
+                            <a href="../profile/profile.html">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="../settings/settings.html">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                            <a href="../login/login.html" class="logout-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <section class="dashboard-section">
+                    <h1>Transactions</h1>
+                    <p class="date">Today is <span id="currentDate"></span></p>
+
+                    <!-- Transaction Filters -->
+                    <section class="transaction-filters">
+                        <div class="filter-group">
+                            <select id="accountFilter" title="Filter by account">
+                                <option value="">All Accounts</option>
+                                <option value="main">Main Account</option>
+                                <option value="savings">Savings Account</option>
+                                <option value="investment">Investment Account</option>
+                            </select>
+                            <select id="typeFilter" title="Filter by transaction type">
+                                <option value="">All Types</option>
+                                <option value="credit">Credits</option>
+                                <option value="debit">Debits</option>
+                            </select>
+                            <select id="dateFilter" title="Filter by date range">
+                                <option value="">All Time</option>
+                                <option value="today">Today</option>
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                                <option value="year">This Year</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary" id="exportTransactions">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                    </section>
+
+                    <!-- Transaction Summary -->
+                    <section class="transaction-summary">
+                        <div class="summary-card">
+                            <h3>Total Credits</h3>
+                            <p class="amount credit">+$5,000.00</p>
+                            <p class="period">This Month</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Total Debits</h3>
+                            <p class="amount debit">-$3,500.00</p>
+                            <p class="period">This Month</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Net Balance</h3>
+                            <p class="amount">$1,500.00</p>
+                            <p class="period">This Month</p>
+                        </div>
+                    </section>
+
+                    <!-- Transactions List -->
+                    <section class="transactions-list">
+                        <div class="list-header">
+                            <div class="header-item">Date</div>
+                            <div class="header-item">Description</div>
+                            <div class="header-item">Category</div>
+                            <div class="header-item">Account</div>
+                            <div class="header-item">Amount</div>
+                            <div class="header-item">Status</div>
+                        </div>
+                        <div class="transaction-items">
+                            <!-- Transaction Item -->
+                            <div class="transaction-item">
+                                <div class="transaction-date">
+                                    <span class="date">Today</span>
+                                    <span class="time">2:30 PM</span>
+                                </div>
+                                <div class="transaction-description">
+                                    <div class="description-icon">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="description-text">
+                                        <h4>Grocery Store</h4>
+                                        <p>Transaction ID: #123456789</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-category">
+                                    <span class="category-badge shopping">Shopping</span>
+                                </div>
+                                <div class="transaction-account">
+                                    Main Account
+                                </div>
+                                <div class="transaction-amount debit">
+                                    -$85.50
+                                </div>
+                                <div class="transaction-status">
+                                    <span class="status-badge completed">Completed</span>
+                                </div>
+                            </div>
+
+                            <!-- Transaction Item -->
+                            <div class="transaction-item">
+                                <div class="transaction-date">
+                                    <span class="date">Yesterday</span>
+                                    <span class="time">9:00 AM</span>
+                                </div>
+                                <div class="transaction-description">
+                                    <div class="description-icon">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </div>
+                                    <div class="description-text">
+                                        <h4>Salary Deposit</h4>
+                                        <p>Transaction ID: #987654321</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-category">
+                                    <span class="category-badge income">Income</span>
+                                </div>
+                                <div class="transaction-account">
+                                    Main Account
+                                </div>
+                                <div class="transaction-amount credit">
+                                    +$3,500.00
+                                </div>
+                                <div class="transaction-status">
+                                    <span class="status-badge completed">Completed</span>
+                                </div>
+                            </div>
+
+                            <!-- Transaction Item -->
+                            <div class="transaction-item">
+                                <div class="transaction-date">
+                                    <span class="date">Yesterday</span>
+                                    <span class="time">7:45 PM</span>
+                                </div>
+                                <div class="transaction-description">
+                                    <div class="description-icon">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div class="description-text">
+                                        <h4>Restaurant</h4>
+                                        <p>Transaction ID: #456789123</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-category">
+                                    <span class="category-badge food">Food & Dining</span>
+                                </div>
+                                <div class="transaction-account">
+                                    Main Account
+                                </div>
+                                <div class="transaction-amount debit">
+                                    -$45.00
+                                </div>
+                                <div class="transaction-status">
+                                    <span class="status-badge completed">Completed</span>
+                                </div>
+                            </div>
+
+                            <!-- Transaction Item -->
+                            <div class="transaction-item">
+                                <div class="transaction-date">
+                                    <span class="date">2 days ago</span>
+                                    <span class="time">3:15 PM</span>
+                                </div>
+                                <div class="transaction-description">
+                                    <div class="description-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div class="description-text">
+                                        <h4>Electricity Bill</h4>
+                                        <p>Transaction ID: #789123456</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-category">
+                                    <span class="category-badge bills">Bills & Utilities</span>
+                                </div>
+                                <div class="transaction-account">
+                                    Main Account
+                                </div>
+                                <div class="transaction-amount debit">
+                                    -$120.00
+                                </div>
+                                <div class="transaction-status">
+                                    <span class="status-badge completed">Completed</span>
+                                </div>
+                            </div>
+
+                            <!-- Transaction Item -->
+                            <div class="transaction-item">
+                                <div class="transaction-date">
+                                    <span class="date">3 days ago</span>
+                                    <span class="time">11:30 AM</span>
+                                </div>
+                                <div class="transaction-description">
+                                    <div class="description-icon">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="description-text">
+                                        <h4>Course Payment</h4>
+                                        <p>Transaction ID: #321654987</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-category">
+                                    <span class="category-badge education">Education</span>
+                                </div>
+                                <div class="transaction-account">
+                                    Savings Account
+                                </div>
+                                <div class="transaction-amount debit">
+                                    -$299.99
+                                </div>
+                                <div class="transaction-status">
+                                    <span class="status-badge completed">Completed</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="pagination">
+                            <button class="btn-page" disabled title="Previous page">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="btn-page active">1</button>
+                            <button class="btn-page">2</button>
+                            <button class="btn-page">3</button>
+                            <button class="btn-page" title="Next page">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./transactions.js"></script>
+</body>
+</html> 

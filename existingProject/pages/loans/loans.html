@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loans - FinVerse</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="./loans.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">FinVerse</div>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="../dashboard/dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../accounts/accounts.html">
+                            <i class="fas fa-wallet"></i>
+                            <span>Accounts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transactions/transactions.html">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transfers/transfers.html">
+                            <i class="fas fa-money-bill-transfer"></i>
+                            <span>Transfers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../bills/bills.html">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Bills</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="../loans/loans.html">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Loans</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../credit-score/credit-score.html">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Credit Score</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../kyc/kyc.html">
+                            <i class="fas fa-id-card"></i>
+                            <span>KYC</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../settings/settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../profile/profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../login/login.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search loans..." id="searchLoans">
+                </div>
+                <div class="top-nav-right">
+                    <a href="../transactions/transactions.html" class="notification-btn" title="View Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
+                    <div class="user-menu" id="userMenu">
+                        <a href="../profile/profile.html" class="user-menu-link">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar" class="avatar">
+                            <span class="user-name">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown">
+                            <a href="../profile/profile.html">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="../settings/settings.html">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                            <a href="../login/login.html" class="logout-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <section class="dashboard-section">
+                    <h1>Loans</h1>
+                    <p class="date">Today is <span id="currentDate"></span></p>
+
+                    <!-- Loan Categories -->
+                    <div class="loan-categories">
+                        <div class="category-card" id="personal">
+                            <i class="fas fa-user"></i>
+                            <h3>Personal Loan</h3>
+                            <p>For personal expenses</p>
+                        </div>
+                        <div class="category-card" id="home">
+                            <i class="fas fa-home"></i>
+                            <h3>Home Loan</h3>
+                            <p>For property purchase</p>
+                        </div>
+                        <div class="category-card" id="car">
+                            <i class="fas fa-car"></i>
+                            <h3>Car Loan</h3>
+                            <p>For vehicle purchase</p>
+                        </div>
+                        <div class="category-card" id="education">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Education Loan</h3>
+                            <p>For educational expenses</p>
+                        </div>
+                    </div>
+
+                    <!-- Loan Form -->
+                    <div class="loan-form-container">
+                        <form id="loanForm" class="loan-form">
+                            <div class="form-group">
+                                <label for="loanType">Loan Type</label>
+                                <select id="loanType" required>
+                                    <option value="">Select Loan Type</option>
+                                    <option value="personal">Personal Loan</option>
+                                    <option value="home">Home Loan</option>
+                                    <option value="car">Car Loan</option>
+                                    <option value="education">Education Loan</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="loanAmount">Loan Amount</label>
+                                <div class="amount-input">
+                                    <span class="currency-symbol">$</span>
+                                    <input type="number" id="loanAmount" min="0" step="1000" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="loanTerm">Loan Term (months)</label>
+                                <input type="number" id="loanTerm" min="1" max="360" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="purpose">Purpose</label>
+                                <textarea id="purpose" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="employmentType">Employment Type</label>
+                                <select id="employmentType" required>
+                                    <option value="">Select Employment Type</option>
+                                    <option value="salaried">Salaried</option>
+                                    <option value="self-employed">Self Employed</option>
+                                    <option value="business">Business</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancelLoan">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Apply for Loan</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Active Loans -->
+                    <section class="active-loans">
+                        <h2>Active Loans</h2>
+                        <div class="loans-list">
+                            <div class="loan-item">
+                                <div class="loan-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div class="loan-details">
+                                    <h4>Home Loan</h4>
+                                    <p>Property Purchase</p>
+                                    <span class="loan-date">Started: Jan 15, 2024</span>
+                                </div>
+                                <div class="loan-amount">
+                                    <span class="amount">$250,000.00</span>
+                                    <span class="status active">Active</span>
+                                </div>
+                            </div>
+                            <div class="loan-item">
+                                <div class="loan-icon">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <div class="loan-details">
+                                    <h4>Car Loan</h4>
+                                    <p>Vehicle Purchase</p>
+                                    <span class="loan-date">Started: Mar 1, 2024</span>
+                                </div>
+                                <div class="loan-amount">
+                                    <span class="amount">$35,000.00</span>
+                                    <span class="status active">Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./loans.js"></script>
+</body>
+</html>

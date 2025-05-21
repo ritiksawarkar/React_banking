@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bills - FinVerse</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="./bills.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">FinVerse</div>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="../dashboard/dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../accounts/accounts.html">
+                            <i class="fas fa-wallet"></i>
+                            <span>Accounts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transactions/transactions.html">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transfers/transfers.html">
+                            <i class="fas fa-money-bill-transfer"></i>
+                            <span>Transfers</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="../bills/bills.html">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Bills</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../loans/loans.html">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Loans</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../credit-score/credit-score.html">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Credit Score</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../kyc/kyc.html">
+                            <i class="fas fa-id-card"></i>
+                            <span>KYC</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../settings/settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../profile/profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../login/login.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search bills..." id="searchBills">
+                </div>
+                <div class="top-nav-right">
+                    <a href="../transactions/transactions.html" class="notification-btn" title="View Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
+                    <div class="user-menu" id="userMenu">
+                        <a href="../profile/profile.html" class="user-menu-link">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar" class="avatar">
+                            <span class="user-name">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown">
+                            <a href="../profile/profile.html">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="../settings/settings.html">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                            <a href="../login/login.html" class="logout-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <section class="dashboard-section">
+                    <h1>Bills</h1>
+                    <p class="date">Today is <span id="currentDate"></span></p>
+
+                    <!-- Bill Categories -->
+                    <div class="bill-categories">
+                        <div class="category-card" id="utilities">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Utilities</h3>
+                            <p>Electricity, Water, Gas</p>
+                        </div>
+                        <div class="category-card" id="subscriptions">
+                            <i class="fas fa-tv"></i>
+                            <h3>Subscriptions</h3>
+                            <p>Streaming, Software, Services</p>
+                        </div>
+                        <div class="category-card" id="rent">
+                            <i class="fas fa-home"></i>
+                            <h3>Rent</h3>
+                            <p>Housing, Property</p>
+                        </div>
+                        <div class="category-card" id="insurance">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Insurance</h3>
+                            <p>Health, Auto, Life</p>
+                        </div>
+                    </div>
+
+                    <!-- Bill Form -->
+                    <div class="bill-form-container">
+                        <form id="billForm" class="bill-form">
+                            <div class="form-group">
+                                <label for="billCategory">Category</label>
+                                <select id="billCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="utilities">Utilities</option>
+                                    <option value="subscriptions">Subscriptions</option>
+                                    <option value="rent">Rent</option>
+                                    <option value="insurance">Insurance</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="billName">Bill Name</label>
+                                <input type="text" id="billName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Amount</label>
+                                <div class="amount-input">
+                                    <span class="currency-symbol">$</span>
+                                    <input type="number" id="amount" min="0" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dueDate">Due Date</label>
+                                <input type="date" id="dueDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentAccount">Payment Account</label>
+                                <select id="paymentAccount" required>
+                                    <option value="">Select Account</option>
+                                    <option value="main">Main Account (****1234)</option>
+                                    <option value="savings">Savings Account (****5678)</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancelBill">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Pay Bill</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Recent Bills -->
+                    <section class="recent-bills">
+                        <h2>Recent Bills</h2>
+                        <div class="bills-list">
+                            <div class="bill-item">
+                                <div class="bill-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="bill-details">
+                                    <h4>Electricity Bill</h4>
+                                    <p>Utility Bill</p>
+                                    <span class="bill-date">Due: Today</span>
+                                </div>
+                                <div class="bill-amount">
+                                    <span class="amount">$120.00</span>
+                                    <span class="status pending">Pending</span>
+                                </div>
+                            </div>
+                            <div class="bill-item">
+                                <div class="bill-icon">
+                                    <i class="fas fa-tv"></i>
+                                </div>
+                                <div class="bill-details">
+                                    <h4>Netflix Subscription</h4>
+                                    <p>Monthly Subscription</p>
+                                    <span class="bill-date">Due: 2024-03-15</span>
+                                </div>
+                                <div class="bill-amount">
+                                    <span class="amount">$15.99</span>
+                                    <span class="status scheduled">Scheduled</span>
+                                </div>
+                            </div>
+                            <div class="bill-item">
+                                <div class="bill-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div class="bill-details">
+                                    <h4>Rent Payment</h4>
+                                    <p>Monthly Rent</p>
+                                    <span class="bill-date">Due: 2024-03-01</span>
+                                </div>
+                                <div class="bill-amount">
+                                    <span class="amount">$1,200.00</span>
+                                    <span class="status completed">Paid</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./bills.js"></script>
+</body>
+</html> 

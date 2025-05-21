@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Score - FinVerse</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="./credit-score.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">FinVerse</div>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="../dashboard/dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../accounts/accounts.html">
+                            <i class="fas fa-wallet"></i>
+                            <span>Accounts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transactions/transactions.html">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transfers/transfers.html">
+                            <i class="fas fa-money-bill-transfer"></i>
+                            <span>Transfers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../bills/bills.html">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Bills</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../loans/loans.html">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Loans</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="../credit-score/credit-score.html">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Credit Score</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../kyc/kyc.html">
+                            <i class="fas fa-id-card"></i>
+                            <span>KYC</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../settings/settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../profile/profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../login/login.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search credit score..." id="searchCreditScore">
+                </div>
+                <div class="top-nav-right">
+                    <a href="../transactions/transactions.html" class="notification-btn" title="View Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
+                    <div class="user-menu" id="userMenu">
+                        <a href="../profile/profile.html" class="user-menu-link">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar" class="avatar">
+                            <span class="user-name">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown">
+                            <a href="../profile/profile.html">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="../settings/settings.html">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                            <a href="../login/login.html" class="logout-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <section class="dashboard-section">
+                    <h1>Credit Score</h1>
+                    <p class="date">Today is <span id="currentDate"></span></p>
+
+                    <!-- Credit Score Overview -->
+                    <div class="credit-score-overview">
+                        <div class="score-card">
+                            <div class="score-circle">
+                                <span class="score">750</span>
+                                <span class="score-label">Good</span>
+                            </div>
+                            <div class="score-details">
+                                <h3>Your Credit Score</h3>
+                                <p>Last updated: <span id="lastUpdated">March 15, 2024</span></p>
+                            </div>
+                        </div>
+                        <div class="score-factors">
+                            <div class="factor">
+                                <i class="fas fa-history"></i>
+                                <div class="factor-details">
+                                    <h4>Payment History</h4>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 95%"></div>
+                                    </div>
+                                    <span class="factor-score">95%</span>
+                                </div>
+                            </div>
+                            <div class="factor">
+                                <i class="fas fa-percentage"></i>
+                                <div class="factor-details">
+                                    <h4>Credit Utilization</h4>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 75%"></div>
+                                    </div>
+                                    <span class="factor-score">75%</span>
+                                </div>
+                            </div>
+                            <div class="factor">
+                                <i class="fas fa-clock"></i>
+                                <div class="factor-details">
+                                    <h4>Credit History</h4>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 85%"></div>
+                                    </div>
+                                    <span class="factor-score">85%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Credit Report -->
+                    <div class="credit-report">
+                        <h2>Credit Report</h2>
+                        <div class="report-filters">
+                            <select id="reportPeriod">
+                                <option value="30">Last 30 Days</option>
+                                <option value="90">Last 90 Days</option>
+                                <option value="180">Last 6 Months</option>
+                                <option value="365">Last Year</option>
+                            </select>
+                        </div>
+                        <div class="report-items">
+                            <div class="report-item">
+                                <div class="item-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="item-details">
+                                    <h4>Loan Payment</h4>
+                                    <p>Home Loan - March 2024</p>
+                                    <span class="item-date">March 15, 2024</span>
+                                </div>
+                                <div class="item-status positive">
+                                    <span>On Time</span>
+                                </div>
+                            </div>
+                            <div class="report-item">
+                                <div class="item-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="item-details">
+                                    <h4>Credit Card Payment</h4>
+                                    <p>Visa Card - March 2024</p>
+                                    <span class="item-date">March 10, 2024</span>
+                                </div>
+                                <div class="item-status positive">
+                                    <span>On Time</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Credit Tips -->
+                    <div class="credit-tips">
+                        <h2>Tips to Improve Your Score</h2>
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <i class="fas fa-clock"></i>
+                                <h4>Pay on Time</h4>
+                                <p>Always pay your bills and loans on time to maintain a good payment history.</p>
+                            </div>
+                            <div class="tip-card">
+                                <i class="fas fa-percentage"></i>
+                                <h4>Keep Utilization Low</h4>
+                                <p>Try to keep your credit utilization below 30% of your available credit.</p>
+                            </div>
+                            <div class="tip-card">
+                                <i class="fas fa-history"></i>
+                                <h4>Maintain Old Accounts</h4>
+                                <p>Keep old credit accounts open to maintain a longer credit history.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./credit-score.js"></script>
+</body>
+</html> 

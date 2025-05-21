@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security - FinVerse Digital Banking</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .security-hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .security-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .security-hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .security-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .security-section {
+            margin-bottom: 4rem;
+        }
+
+        .security-section h2 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .security-section h3 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin: 2rem 0 1rem;
+        }
+
+        .security-section p {
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .security-card {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .security-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .security-card h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .security-card p {
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        .security-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .security-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .security-feature i {
+            color: #4f46e5;
+            font-size: 1.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .security-feature-content h4 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+
+        .security-feature-content p {
+            color: #4b5563;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .security-tips {
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .security-tips h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .security-tips ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            color: #4b5563;
+        }
+
+        .security-tips li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .security-contact {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 3rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .security-contact h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .security-contact p {
+            margin-bottom: 2rem;
+        }
+
+        .security-contact-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .security-contact-btn:hover {
+            background: #4338ca;
+        }
+
+        @media (max-width: 768px) {
+            .security-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .security-hero p {
+                font-size: 1.125rem;
+            }
+
+            .security-container {
+                padding: 2rem 1rem;
+            }
+
+            .security-section h2 {
+                font-size: 1.75rem;
+            }
+
+            .security-section h3 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <div class="logo-container">
+                <div class="logo">FinVerse</div>
+            </div>
+            <nav class="landing-nav">
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#benefits">Benefits</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="./pages/login/login.html" class="btn btn-login">Login</a>
+                <a href="./pages/register/register.html" class="btn btn-register">Register</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <section class="security-hero">
+            <h1>Your Security is Our Priority</h1>
+            <p>Learn about our advanced security measures and how we protect your financial information.</p>
+        </section>
+
+        <div class="security-container">
+            <section class="security-section">
+                <h2>Our Security Measures</h2>
+                <p>At FinVerse, we employ multiple layers of security to protect your account and personal information. Our security infrastructure is designed to prevent unauthorized access and ensure the safety of your financial data.</p>
+                
+                <div class="security-grid">
+                    <div class="security-card">
+                        <h3><i class="fas fa-shield-alt"></i> Advanced Encryption</h3>
+                        <p>We use industry-standard 256-bit encryption to protect your data during transmission and storage.</p>
+                    </div>
+                    <div class="security-card">
+                        <h3><i class="fas fa-fingerprint"></i> Biometric Authentication</h3>
+                        <p>Secure your account with fingerprint and facial recognition technology.</p>
+                    </div>
+                    <div class="security-card">
+                        <h3><i class="fas fa-lock"></i> Multi-Factor Authentication</h3>
+                        <p>Add an extra layer of security with 2FA using SMS, email, or authenticator apps.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="security-section">
+                <h2>Security Features</h2>
+                <div class="security-features">
+                    <div class="security-feature">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div class="security-feature-content">
+                            <h4>Device Management</h4>
+                            <p>Monitor and manage devices connected to your account.</p>
+                        </div>
+                    </div>
+                    <div class="security-feature">
+                        <i class="fas fa-bell"></i>
+                        <div class="security-feature-content">
+                            <h4>Real-time Alerts</h4>
+                            <p>Receive instant notifications for suspicious activities.</p>
+                        </div>
+                    </div>
+                    <div class="security-feature">
+                        <i class="fas fa-history"></i>
+                        <div class="security-feature-content">
+                            <h4>Transaction Monitoring</h4>
+                            <p>Advanced systems to detect and prevent fraudulent transactions.</p>
+                        </div>
+                    </div>
+                    <div class="security-feature">
+                        <i class="fas fa-user-shield"></i>
+                        <div class="security-feature-content">
+                            <h4>Account Protection</h4>
+                            <p>Secure login and session management features.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="security-section">
+                <h2>Security Best Practices</h2>
+                <div class="security-tips">
+                    <h3>Protect Your Account</h3>
+                    <ul>
+                        <li>Use a strong, unique password for your account</li>
+                        <li>Enable two-factor authentication</li>
+                        <li>Keep your contact information up to date</li>
+                        <li>Regularly review your account activity</li>
+                        <li>Never share your login credentials</li>
+                        <li>Log out after each session</li>
+                        <li>Use secure networks for banking</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="security-section">
+                <h2>Fraud Prevention</h2>
+                <p>We employ sophisticated fraud detection systems that monitor transactions 24/7. Our systems analyze patterns and behaviors to identify and prevent fraudulent activities before they affect your account.</p>
+                
+                <div class="security-tips">
+                    <h3>Common Fraud Prevention Tips</h3>
+                    <ul>
+                        <li>Be cautious of phishing emails and suspicious links</li>
+                        <li>Verify the authenticity of financial requests</li>
+                        <li>Monitor your account regularly for unauthorized transactions</li>
+                        <li>Report suspicious activities immediately</li>
+                        <li>Keep your devices and software updated</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="security-contact">
+                <h2>Report Security Concerns</h2>
+                <p>If you notice any suspicious activity or have security concerns, our security team is available 24/7 to assist you.</p>
+                <a href="#" class="security-contact-btn">Contact Security Team</a>
+            </section>
+        </div>
+
+        <footer class="landing-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">FinVerse</div>
+                    <p>Banking for the digital age</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="press.html">Press</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="#">Accounts</a></li>
+                            <li><a href="#">Cards</a></li>
+                            <li><a href="#">Loans</a></li>
+                            <li><a href="#">Investments</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="help-center.html">Help Center</a></li>
+                            <li><a href="security.html">Security</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Community</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="terms-of-service.html">Terms of Service</a></li>
+                            <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                            <li><a href="compliance.html">Compliance</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 FinVerse. All rights reserved.</p>
+                <div class="app-downloads">
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-apple"></i>
+                        <span>App Store</span>
+                    </a>
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-google-play"></i>
+                        <span>Google Play</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+</html> 

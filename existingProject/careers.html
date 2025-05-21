@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - FinVerse Digital Banking</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .careers-hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .careers-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .careers-hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .benefits-section {
+            padding: 5rem 2rem;
+            background: #f9fafb;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .benefit-card i {
+            font-size: 2.5rem;
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .benefit-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .jobs-section {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .jobs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .jobs-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .jobs-header h2 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .job-card {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-card h3 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-card .location {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .job-card .description {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .job-card .apply-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #4f46e5;
+            color: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .job-card .apply-btn:hover {
+            background: #4338ca;
+        }
+
+        .culture-section {
+            padding: 5rem 2rem;
+            background: #f9fafb;
+        }
+
+        .culture-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .culture-header h2 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .culture-header p {
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .culture-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .culture-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .culture-card h3 {
+            font-size: 1.25rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .culture-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .careers-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .careers-hero p {
+                font-size: 1.125rem;
+            }
+
+            .benefits-section,
+            .jobs-section,
+            .culture-section {
+                padding: 3rem 1rem;
+            }
+
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <div class="logo-container">
+                <div class="logo">FinVerse</div>
+            </div>
+            <nav class="landing-nav">
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#benefits">Benefits</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="./pages/login/login.html" class="btn btn-login">Login</a>
+                <a href="./pages/register/register.html" class="btn btn-register">Register</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <section class="careers-hero">
+            <h1>Join Our Team</h1>
+            <p>Be part of the future of digital banking and help us transform the financial landscape</p>
+        </section>
+
+        <section class="benefits-section">
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Health & Wellness</h3>
+                    <p>Comprehensive health coverage, wellness programs, and mental health support for you and your family.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Learning & Development</h3>
+                    <p>Continuous learning opportunities, professional development programs, and tuition reimbursement.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-home"></i>
+                    <h3>Work-Life Balance</h3>
+                    <p>Flexible work arrangements, generous PTO, and remote work options to support your lifestyle.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="jobs-section">
+            <div class="jobs-container">
+                <div class="jobs-header">
+                    <h2>Open Positions</h2>
+                </div>
+                <div class="jobs-grid">
+                    <div class="job-card">
+                        <h3>Senior Software Engineer</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> New York, NY (Remote)</p>
+                        <p class="description">Join our engineering team to build and scale our digital banking platform using cutting-edge technologies.</p>
+                        <a href="#" class="apply-btn">Apply Now</a>
+                    </div>
+                    <div class="job-card">
+                        <h3>Product Manager</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
+                        <p class="description">Lead product development initiatives and drive innovation in our digital banking solutions.</p>
+                        <a href="#" class="apply-btn">Apply Now</a>
+                    </div>
+                    <div class="job-card">
+                        <h3>UX/UI Designer</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Remote</p>
+                        <p class="description">Create intuitive and engaging user experiences for our digital banking platform.</p>
+                        <a href="#" class="apply-btn">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="culture-section">
+            <div class="culture-container">
+                <div class="culture-header">
+                    <h2>Our Culture</h2>
+                    <p>Join a team that values innovation, collaboration, and continuous growth</p>
+                </div>
+                <div class="culture-grid">
+                    <div class="culture-card">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c" alt="Team Collaboration">
+                        <h3>Collaborative Environment</h3>
+                        <p>Work with talented individuals who share your passion for innovation and excellence.</p>
+                    </div>
+                    <div class="culture-card">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978" alt="Innovation">
+                        <h3>Innovation First</h3>
+                        <p>Push boundaries and explore new ideas in a supportive and forward-thinking environment.</p>
+                    </div>
+                    <div class="culture-card">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="Growth">
+                        <h3>Continuous Growth</h3>
+                        <p>Access resources and opportunities to develop your skills and advance your career.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="landing-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">FinVerse</div>
+                    <p>Banking for the digital age</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="#">Accounts</a></li>
+                            <li><a href="#">Cards</a></li>
+                            <li><a href="#">Loans</a></li>
+                            <li><a href="#">Investments</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Security</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Community</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                            <li><a href="#">Compliance</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 FinVerse. All rights reserved.</p>
+                <div class="app-downloads">
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-apple"></i>
+                        <span>App Store</span>
+                    </a>
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-google-play"></i>
+                        <span>Google Play</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+</html> 

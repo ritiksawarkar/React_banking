@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards - FinVerse Digital Banking</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .cards-hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .cards-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cards-hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .cards-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .card-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .card-item {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #4f46e5, #2563eb);
+        }
+
+        .card-item i {
+            font-size: 2.5rem;
+            color: #4f46e5;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-item h3 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .card-item p {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-item .features {
+            margin-bottom: 1.5rem;
+        }
+
+        .card-item .features li {
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-item .features li i {
+            font-size: 1rem;
+            color: #10b981;
+            margin: 0;
+        }
+
+        .card-item .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .card-item .btn:hover {
+            background: #4338ca;
+        }
+
+        .benefits-section {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 4rem 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .benefits-section h2 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.25rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card p {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .security-section {
+            margin-bottom: 4rem;
+        }
+
+        .security-section h2 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .security-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .security-card i {
+            font-size: 2rem;
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
+
+        .security-card h3 {
+            font-size: 1.25rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .security-card p {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: #4b5563;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #4338ca;
+        }
+
+        @media (max-width: 768px) {
+            .cards-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .cards-hero p {
+                font-size: 1.125rem;
+            }
+
+            .cards-container {
+                padding: 2rem 1rem;
+            }
+
+            .benefits-section h2,
+            .security-section h2 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <div class="logo-container">
+                <a href="index.html" class="logo">FinVerse</a>
+            </div>
+            <nav class="landing-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="accounts.html">Accounts</a></li>
+                    <li><a href="cards.html">Cards</a></li>
+                    <li><a href="loans.html">Loans</a></li>
+                    <li><a href="investments.html">Investments</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="./pages/login/login.html" class="btn btn-login">Login</a>
+                <a href="./pages/register/register.html" class="btn btn-register">Register</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <section class="cards-hero">
+            <h1>Smart Banking Cards</h1>
+            <p>Experience seamless transactions with our range of feature-rich banking cards.</p>
+        </section>
+
+        <div class="cards-container">
+            <div class="card-types">
+                <div class="card-item">
+                    <i class="fas fa-credit-card"></i>
+                    <h3>Credit Cards</h3>
+                    <p>Enjoy premium benefits and rewards with our range of credit cards.</p>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Cashback rewards</li>
+                        <li><i class="fas fa-check"></i> Travel benefits</li>
+                        <li><i class="fas fa-check"></i> Zero annual fee</li>
+                        <li><i class="fas fa-check"></i> Contactless payments</li>
+                    </ul>
+                    <a href="#" class="btn">Apply Now</a>
+                </div>
+                <div class="card-item">
+                    <i class="fas fa-debit-card"></i>
+                    <h3>Debit Cards</h3>
+                    <p>Access your funds instantly with our secure debit cards.</p>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Zero transaction fees</li>
+                        <li><i class="fas fa-check"></i> ATM access worldwide</li>
+                        <li><i class="fas fa-check"></i> Real-time alerts</li>
+                        <li><i class="fas fa-check"></i> Digital wallet support</li>
+                    </ul>
+                    <a href="#" class="btn">Get Started</a>
+                </div>
+                <div class="card-item">
+                    <i class="fas fa-gift"></i>
+                    <h3>Prepaid Cards</h3>
+                    <p>Manage your expenses with our reloadable prepaid cards.</p>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> No credit check</li>
+                        <li><i class="fas fa-check"></i> Budget control</li>
+                        <li><i class="fas fa-check"></i> Online reloading</li>
+                        <li><i class="fas fa-check"></i> Family accounts</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <section class="benefits-section">
+                <h2>Card Benefits</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <h3>Rewards Program</h3>
+                        <p>Earn points on every transaction and redeem them for exciting rewards.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h3>Travel Insurance</h3>
+                        <p>Enjoy comprehensive travel insurance coverage with premium cards.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h3>24/7 Support</h3>
+                        <p>Get assistance anytime with our round-the-clock customer support.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="security-section">
+                <h2>Security Features</h2>
+                <div class="security-grid">
+                    <div class="security-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Fraud Protection</h3>
+                        <p>Advanced fraud detection and protection for all your transactions.</p>
+                    </div>
+                    <div class="security-card">
+                        <i class="fas fa-lock"></i>
+                        <h3>Secure Transactions</h3>
+                        <p>End-to-end encryption for all your card transactions.</p>
+                    </div>
+                    <div class="security-card">
+                        <i class="fas fa-bell"></i>
+                        <h3>Instant Alerts</h3>
+                        <p>Real-time notifications for all your card activities.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <h2>Get Your Card Today</h2>
+                <p>Choose the perfect card for your needs and start enjoying exclusive benefits.</p>
+                <a href="#" class="cta-btn">Apply for a Card</a>
+            </section>
+        </div>
+
+        <footer class="landing-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">FinVerse</div>
+                    <p>Banking for the digital age</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="press.html">Press</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="accounts.html">Accounts</a></li>
+                            <li><a href="cards.html">Cards</a></li>
+                            <li><a href="loans.html">Loans</a></li>
+                            <li><a href="investments.html">Investments</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="help-center.html">Help Center</a></li>
+                            <li><a href="security.html">Security</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                            <li><a href="community.html">Community</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="terms-of-service.html">Terms of Service</a></li>
+                            <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                            <li><a href="compliance.html">Compliance</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 FinVerse. All rights reserved.</p>
+                <div class="app-downloads">
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-apple"></i>
+                        <span>App Store</span>
+                    </a>
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-google-play"></i>
+                        <span>Google Play</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+</html> 

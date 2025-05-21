@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfers - FinVerse</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="./transfers.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">FinVerse</div>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="../dashboard/dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../accounts/accounts.html">
+                            <i class="fas fa-wallet"></i>
+                            <span>Accounts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../transactions/transactions.html">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="../transfers/transfers.html">
+                            <i class="fas fa-money-bill-transfer"></i>
+                            <span>Transfers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../bills/bills.html">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Bills</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../loans/loans.html">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Loans</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../credit-score/credit-score.html">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Credit Score</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../kyc/kyc.html">
+                            <i class="fas fa-id-card"></i>
+                            <span>KYC</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../settings/settings.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../profile/profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../login/login.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search transfers..." id="searchTransfers">
+                </div>
+                <div class="top-nav-right">
+                    <a href="../transactions/transactions.html" class="notification-btn" title="View Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
+                    <div class="user-menu" id="userMenu">
+                        <a href="../profile/profile.html" class="user-menu-link">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User Avatar" class="avatar">
+                            <span class="user-name">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown">
+                            <a href="../profile/profile.html">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="../settings/settings.html">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                            <a href="../login/login.html" class="logout-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <section class="dashboard-section">
+                    <h1>Transfers</h1>
+                    <p class="date">Today is <span id="currentDate"></span></p>
+
+                    <!-- Transfer Options -->
+                    <div class="transfer-options">
+                        <div class="option-card" id="internalTransfer">
+                            <i class="fas fa-exchange-alt"></i>
+                            <h3>Internal Transfer</h3>
+                            <p>Transfer between your accounts</p>
+                        </div>
+                        <div class="option-card" id="externalTransfer">
+                            <i class="fas fa-user-friends"></i>
+                            <h3>External Transfer</h3>
+                            <p>Send money to other accounts</p>
+                        </div>
+                        <div class="option-card" id="qrTransfer">
+                            <i class="fas fa-qrcode"></i>
+                            <h3>QR Transfer</h3>
+                            <p>Scan QR code to transfer</p>
+                        </div>
+                        <div class="option-card" id="scheduledTransfer">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>Scheduled Transfer</h3>
+                            <p>Set up future transfers</p>
+                        </div>
+                    </div>
+
+                    <!-- Transfer Form -->
+                    <div class="transfer-form-container">
+                        <form id="transferForm" class="transfer-form">
+                            <div class="form-group">
+                                <label for="fromAccount">From Account</label>
+                                <select id="fromAccount" required>
+                                    <option value="">Select Account</option>
+                                    <option value="main">Main Account (****1234)</option>
+                                    <option value="savings">Savings Account (****5678)</option>
+                                    <option value="investment">Investment Account (****9012)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="toAccount">To Account</label>
+                                <select id="toAccount" required>
+                                    <option value="">Select Account</option>
+                                    <option value="main">Main Account (****1234)</option>
+                                    <option value="savings">Savings Account (****5678)</option>
+                                    <option value="investment">Investment Account (****9012)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Amount</label>
+                                <div class="amount-input">
+                                    <span class="currency-symbol">$</span>
+                                    <input type="number" id="amount" min="0" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" id="description" placeholder="Enter transfer description">
+                            </div>
+                            <div class="form-group">
+                                <label for="transferDate">Transfer Date</label>
+                                <input type="date" id="transferDate" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancelTransfer">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Transfer Money</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Recent Transfers -->
+                    <section class="recent-transfers">
+                        <h2>Recent Transfers</h2>
+                        <div class="transfers-list">
+                            <div class="transfer-item">
+                                <div class="transfer-icon">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <div class="transfer-details">
+                                    <h4>Internal Transfer</h4>
+                                    <p>Main Account → Savings Account</p>
+                                    <span class="transfer-date">Today, 10:30 AM</span>
+                                </div>
+                                <div class="transfer-amount">
+                                    <span class="amount">-$500.00</span>
+                                    <span class="status success">Completed</span>
+                                </div>
+                            </div>
+                            <div class="transfer-item">
+                                <div class="transfer-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="transfer-details">
+                                    <h4>External Transfer</h4>
+                                    <p>To: John Doe (****4321)</p>
+                                    <span class="transfer-date">Yesterday, 3:45 PM</span>
+                                </div>
+                                <div class="transfer-amount">
+                                    <span class="amount">-$250.00</span>
+                                    <span class="status success">Completed</span>
+                                </div>
+                            </div>
+                            <div class="transfer-item">
+                                <div class="transfer-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div class="transfer-details">
+                                    <h4>Scheduled Transfer</h4>
+                                    <p>Savings Account → Investment Account</p>
+                                    <span class="transfer-date">Scheduled for: 2024-03-15</span>
+                                </div>
+                                <div class="transfer-amount">
+                                    <span class="amount">-$1,000.00</span>
+                                    <span class="status pending">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="./transfers.js"></script>
+
+    <!-- Add this before the closing body tag -->
+    <div id="qrScannerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Scan QR Code</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="qr-scan-options">
+                    <div class="scan-option active" data-option="camera">
+                        <i class="fas fa-camera"></i>
+                        <span>Scan with Camera</span>
+                    </div>
+                    <div class="scan-option" data-option="upload">
+                        <i class="fas fa-upload"></i>
+                        <span>Upload Image</span>
+                    </div>
+                    <div class="scan-option" data-option="generate">
+                        <i class="fas fa-qrcode"></i>
+                        <span>Generate QR</span>
+                    </div>
+                </div>
+                
+                <div id="qr-reader"></div>
+                
+                <div id="qr-upload-section" style="display: none;">
+                    <div id="uploadArea" class="upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag and drop your QR code image here or</p>
+                        <label for="qrFileInput" class="upload-btn">Choose File</label>
+                        <input type="file" id="qrFileInput" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+
+                <div id="qr-generate-section" style="display: none;">
+                    <div class="qr-generate-form">
+                        <div class="form-group">
+                            <label for="qrAccountNumber">Account Number:</label>
+                            <input type="text" id="qrAccountNumber" placeholder="Enter account number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="qrAccountName">Account Name:</label>
+                            <input type="text" id="qrAccountName" placeholder="Enter account name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="qrAmount">Amount:</label>
+                            <div class="amount-input">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="qrAmount" placeholder="Enter amount" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="qrDescription">Description:</label>
+                            <input type="text" id="qrDescription" placeholder="Enter description">
+                        </div>
+                        <button onclick="generateTransferQR()" class="btn btn-primary generate-btn">
+                            <i class="fas fa-qrcode"></i>
+                            Generate QR Code
+                        </button>
+                    </div>
+                    <div id="generated-qr" class="qr-result">
+                        <div class="qr-code-container"></div>
+                        <div class="qr-actions"></div>
+                    </div>
+                </div>
+                
+                <div id="qr-reader-results"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

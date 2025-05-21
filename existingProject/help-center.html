@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - FinVerse Digital Banking</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .help-hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .help-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .help-hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .help-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .search-section {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-right: 3rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1.125rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+
+        .help-section {
+            margin-bottom: 3rem;
+        }
+
+        .help-section h2 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .help-card {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .help-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .help-card h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .help-card p {
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        .help-card a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .help-card a:hover {
+            text-decoration: underline;
+        }
+
+        .faq-section {
+            margin-top: 4rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: #f9fafb;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question h3 {
+            margin: 0;
+            font-size: 1.125rem;
+            color: #1f2937;
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            color: #4b5563;
+            line-height: 1.8;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .contact-section {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 3rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-option i {
+            font-size: 2rem;
+            color: #4f46e5;
+        }
+
+        @media (max-width: 768px) {
+            .help-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .help-hero p {
+                font-size: 1.125rem;
+            }
+
+            .help-container {
+                padding: 2rem 1rem;
+            }
+
+            .help-section h2 {
+                font-size: 1.75rem;
+            }
+
+            .contact-options {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <div class="logo-container">
+                <div class="logo">FinVerse</div>
+            </div>
+            <nav class="landing-nav">
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#benefits">Benefits</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="./pages/login/login.html" class="btn btn-login">Login</a>
+                <a href="./pages/register/register.html" class="btn btn-register">Register</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <section class="help-hero">
+            <h1>How can we help you?</h1>
+            <p>Find answers to your questions and get support for your banking needs.</p>
+        </section>
+
+        <div class="help-container">
+            <section class="search-section">
+                <div class="search-box">
+                    <input type="text" placeholder="Search for help...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </section>
+
+            <section class="help-section">
+                <h2>Popular Topics</h2>
+                <div class="help-grid">
+                    <div class="help-card">
+                        <h3><i class="fas fa-user-plus"></i> Getting Started</h3>
+                        <p>Learn how to create and set up your FinVerse account.</p>
+                        <a href="#">View Guide <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="help-card">
+                        <h3><i class="fas fa-shield-alt"></i> Security</h3>
+                        <p>Keep your account safe with our security features.</p>
+                        <a href="#">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="help-card">
+                        <h3><i class="fas fa-exchange-alt"></i> Transactions</h3>
+                        <p>Understanding transfers, payments, and transactions.</p>
+                        <a href="#">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="help-card">
+                        <h3><i class="fas fa-credit-card"></i> Cards</h3>
+                        <p>Manage your cards and understand card features.</p>
+                        <a href="#">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="help-card">
+                        <h3><i class="fas fa-chart-line"></i> Investments</h3>
+                        <p>Learn about our investment products and services.</p>
+                        <a href="#">Explore <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="help-card">
+                        <h3><i class="fas fa-mobile-alt"></i> Mobile Banking</h3>
+                        <p>Get the most out of our mobile banking app.</p>
+                        <a href="#">View Guide <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I reset my password?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To reset your password, click on the "Forgot Password" link on the login page. You'll receive an email with instructions to create a new password. Make sure to use a strong password that includes a mix of letters, numbers, and special characters.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I add a new payee?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To add a new payee, log in to your account, go to the "Payments" section, and select "Add New Payee." You'll need to provide the payee's account details and verify the information before saving.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What are the transaction limits?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Transaction limits vary based on your account type and verification level. You can view your specific limits in the "Account Settings" section. Contact our support team if you need to request a limit increase.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I report a lost card?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If your card is lost or stolen, immediately log in to your account and go to the "Cards" section to report it. You can also call our 24/7 support line. We'll block the card and arrange for a replacement.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-section">
+                <h2>Still Need Help?</h2>
+                <p>Our support team is here to assist you 24/7.</p>
+                <div class="contact-options">
+                    <div class="contact-option">
+                        <i class="fas fa-phone"></i>
+                        <h3>Call Us</h3>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                    <div class="contact-option">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email Us</h3>
+                        <p>support@finverse.com</p>
+                    </div>
+                    <div class="contact-option">
+                        <i class="fas fa-comments"></i>
+                        <h3>Live Chat</h3>
+                        <p>Available 24/7</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="landing-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">FinVerse</div>
+                    <p>Banking for the digital age</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="press.html">Press</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="#">Accounts</a></li>
+                            <li><a href="#">Cards</a></li>
+                            <li><a href="#">Loans</a></li>
+                            <li><a href="#">Investments</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="help-center.html">Help Center</a></li>
+                            <li><a href="#">Security</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Community</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="terms-of-service.html">Terms of Service</a></li>
+                            <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                            <li><a href="compliance.html">Compliance</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 FinVerse. All rights reserved.</p>
+                <div class="app-downloads">
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-apple"></i>
+                        <span>App Store</span>
+                    </a>
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-google-play"></i>
+                        <span>Google Play</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
+    <script>
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html> 

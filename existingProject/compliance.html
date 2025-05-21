@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance - FinVerse Digital Banking</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .compliance-hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .compliance-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .compliance-hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .compliance-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .compliance-section {
+            margin-bottom: 3rem;
+        }
+
+        .compliance-section h2 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .compliance-section h3 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin: 2rem 0 1rem;
+        }
+
+        .compliance-section p {
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .compliance-section ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .compliance-section li {
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .compliance-card {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .compliance-card h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .compliance-card p {
+            color: #4b5563;
+            margin-bottom: 0;
+        }
+
+        .last-updated {
+            color: #6b7280;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .compliance-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .compliance-hero p {
+                font-size: 1.125rem;
+            }
+
+            .compliance-container {
+                padding: 2rem 1rem;
+            }
+
+            .compliance-section h2 {
+                font-size: 1.75rem;
+            }
+
+            .compliance-section h3 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <div class="logo-container">
+                <a href="index.html" class="logo">FinVerse</a>
+            </div>
+            <nav class="landing-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="accounts.html">Accounts</a></li>
+                    <li><a href="cards.html">Cards</a></li>
+                    <li><a href="loans.html">Loans</a></li>
+                    <li><a href="investments.html">Investments</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="./pages/login/login.html" class="btn btn-login">Login</a>
+                <a href="./pages/register/register.html" class="btn btn-register">Register</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <section class="compliance-hero">
+            <h1>Compliance & Regulations</h1>
+            <p>Our commitment to maintaining the highest standards of regulatory compliance and security.</p>
+        </section>
+
+        <div class="compliance-container">
+            <p class="last-updated">Last Updated: March 15, 2024</p>
+
+            <section class="compliance-section">
+                <h2>Our Compliance Framework</h2>
+                <p>At FinVerse, we maintain a robust compliance framework that ensures we meet all regulatory requirements and industry standards. Our commitment to compliance is fundamental to our operations and helps protect our customers' interests.</p>
+            </section>
+
+            <section class="compliance-section">
+                <h2>Key Compliance Areas</h2>
+                <div class="compliance-grid">
+                    <div class="compliance-card">
+                        <h3>Anti-Money Laundering (AML)</h3>
+                        <p>We implement comprehensive AML measures to prevent financial crimes and ensure the integrity of our banking system.</p>
+                    </div>
+                    <div class="compliance-card">
+                        <h3>Know Your Customer (KYC)</h3>
+                        <p>Our KYC procedures help us verify customer identities and maintain accurate customer records.</p>
+                    </div>
+                    <div class="compliance-card">
+                        <h3>Data Protection</h3>
+                        <p>We adhere to strict data protection regulations to safeguard customer information and maintain privacy.</p>
+                    </div>
+                    <div class="compliance-card">
+                        <h3>Financial Crime Prevention</h3>
+                        <p>Our systems and processes are designed to detect and prevent various forms of financial crime.</p>
+                    </div>
+                    <div class="compliance-card">
+                        <h3>Regulatory Reporting</h3>
+                        <p>We maintain accurate records and submit required reports to regulatory authorities.</p>
+                    </div>
+                    <div class="compliance-card">
+                        <h3>Risk Management</h3>
+                        <p>Our risk management framework helps identify and mitigate potential risks to our operations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="compliance-section">
+                <h2>Regulatory Compliance</h2>
+                <p>We comply with various regulatory requirements, including:</p>
+                <ul>
+                    <li>Bank Secrecy Act (BSA)</li>
+                    <li>USA PATRIOT Act</li>
+                    <li>Gramm-Leach-Bliley Act (GLBA)</li>
+                    <li>Payment Card Industry Data Security Standard (PCI DSS)</li>
+                    <li>General Data Protection Regulation (GDPR)</li>
+                    <li>California Consumer Privacy Act (CCPA)</li>
+                </ul>
+            </section>
+
+            <section class="compliance-section">
+                <h2>Security Measures</h2>
+                <p>Our security measures include:</p>
+                <ul>
+                    <li>Advanced encryption technologies</li>
+                    <li>Multi-factor authentication</li>
+                    <li>Regular security audits</li>
+                    <li>Employee training programs</li>
+                    <li>Incident response procedures</li>
+                    <li>Continuous monitoring systems</li>
+                </ul>
+            </section>
+
+            <section class="compliance-section">
+                <h2>Customer Responsibilities</h2>
+                <p>To help maintain compliance and security, we ask our customers to:</p>
+                <ul>
+                    <li>Provide accurate and up-to-date information</li>
+                    <li>Report suspicious activities immediately</li>
+                    <li>Maintain secure account credentials</li>
+                    <li>Review account statements regularly</li>
+                    <li>Keep contact information current</li>
+                </ul>
+            </section>
+
+            <section class="compliance-section">
+                <h2>Compliance Training</h2>
+                <p>We maintain a comprehensive compliance training program for our employees, covering:</p>
+                <ul>
+                    <li>Regulatory requirements</li>
+                    <li>Internal policies and procedures</li>
+                    <li>Customer due diligence</li>
+                    <li>Fraud prevention</li>
+                    <li>Data protection</li>
+                </ul>
+            </section>
+
+            <section class="compliance-section">
+                <h2>Contact Our Compliance Team</h2>
+                <p>For compliance-related inquiries, please contact our compliance team at:</p>
+                <p>Email: compliance@finverse.com<br>
+                Address: 123 Financial District, New York, NY 10004</p>
+            </section>
+        </div>
+
+        <footer class="landing-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">FinVerse</div>
+                    <p>Banking for the digital age</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="press.html">Press</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="accounts.html">Accounts</a></li>
+                            <li><a href="cards.html">Cards</a></li>
+                            <li><a href="loans.html">Loans</a></li>
+                            <li><a href="investments.html">Investments</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="help-center.html">Help Center</a></li>
+                            <li><a href="security.html">Security</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                            <li><a href="community.html">Community</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="terms-of-service.html">Terms of Service</a></li>
+                            <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                            <li><a href="compliance.html">Compliance</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 FinVerse. All rights reserved.</p>
+                <div class="app-downloads">
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-apple"></i>
+                        <span>App Store</span>
+                    </a>
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-google-play"></i>
+                        <span>Google Play</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+</html> 

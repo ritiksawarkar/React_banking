@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - FinVerse Digital Banking</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .community-hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .community-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .community-hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .community-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .community-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .community-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .community-card i {
+            font-size: 2.5rem;
+            color: #4f46e5;
+            margin-bottom: 1.5rem;
+        }
+
+        .community-card h3 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .community-card p {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .community-card .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .community-card .btn:hover {
+            background: #4338ca;
+        }
+
+        .events-section {
+            margin-bottom: 4rem;
+        }
+
+        .events-section h2 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .event-content {
+            padding: 1.5rem;
+        }
+
+        .event-date {
+            color: #4f46e5;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-title {
+            font-size: 1.25rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .event-description {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .event-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .event-meta i {
+            color: #4f46e5;
+        }
+
+        .join-section {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .join-section h2 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .join-section p {
+            color: #4b5563;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .join-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-btn:hover {
+            background: #4338ca;
+        }
+
+        @media (max-width: 768px) {
+            .community-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .community-hero p {
+                font-size: 1.125rem;
+            }
+
+            .community-container {
+                padding: 2rem 1rem;
+            }
+
+            .events-section h2 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <div class="logo-container">
+                <div class="logo">FinVerse</div>
+            </div>
+            <nav class="landing-nav">
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#benefits">Benefits</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="./pages/login/login.html" class="btn btn-login">Login</a>
+                <a href="./pages/register/register.html" class="btn btn-register">Register</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <section class="community-hero">
+            <h1>Join Our Community</h1>
+            <p>Connect with fellow FinVerse users, share experiences, and learn from financial experts.</p>
+        </section>
+
+        <div class="community-container">
+            <div class="community-grid">
+                <div class="community-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Community Forums</h3>
+                    <p>Join discussions with other FinVerse users. Share tips, ask questions, and learn from the community.</p>
+                    <a href="#" class="btn">Join Forums</a>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Financial Education</h3>
+                    <p>Access free resources, webinars, and courses to improve your financial literacy.</p>
+                    <a href="#" class="btn">Start Learning</a>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Networking Events</h3>
+                    <p>Connect with other professionals and entrepreneurs in our regular networking events.</p>
+                    <a href="#" class="btn">View Events</a>
+                </div>
+            </div>
+
+            <section class="events-section">
+                <h2>Upcoming Community Events</h2>
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        <div class="event-content">
+                            <div class="event-date">June 15, 2024</div>
+                            <h3 class="event-title">Financial Planning Workshop</h3>
+                            <p class="event-description">Learn essential financial planning strategies from industry experts.</p>
+                            <div class="event-meta">
+                                <span><i class="fas fa-clock"></i> 2:00 PM EST</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Virtual Event</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        <div class="event-content">
+                            <div class="event-date">June 22, 2024</div>
+                            <h3 class="event-title">Investment Strategies Webinar</h3>
+                            <p class="event-description">Discover effective investment strategies for long-term wealth building.</p>
+                            <div class="event-meta">
+                                <span><i class="fas fa-clock"></i> 3:00 PM EST</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Virtual Event</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        <div class="event-content">
+                            <div class="event-date">July 1, 2024</div>
+                            <h3 class="event-title">Entrepreneurs Meetup</h3>
+                            <p class="event-description">Network with fellow entrepreneurs and share business insights.</p>
+                            <div class="event-meta">
+                                <span><i class="fas fa-clock"></i> 6:00 PM EST</span>
+                                <span><i class="fas fa-map-marker-alt"></i> New York City</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="join-section">
+                <h2>Become Part of Our Community</h2>
+                <p>Join thousands of FinVerse users who are already benefiting from our community features. Share your experiences, learn from others, and grow your financial knowledge.</p>
+                <a href="#" class="join-btn">Join Now</a>
+            </section>
+        </div>
+
+        <footer class="landing-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">FinVerse</div>
+                    <p>Banking for the digital age</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="press.html">Press</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="#">Accounts</a></li>
+                            <li><a href="#">Cards</a></li>
+                            <li><a href="#">Loans</a></li>
+                            <li><a href="#">Investments</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="help-center.html">Help Center</a></li>
+                            <li><a href="security.html">Security</a></li>
+                            <li><a href="faqs.html">FAQs</a></li>
+                            <li><a href="community.html">Community</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                            <li><a href="terms-of-service.html">Terms of Service</a></li>
+                            <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                            <li><a href="compliance.html">Compliance</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 FinVerse. All rights reserved.</p>
+                <div class="app-downloads">
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-apple"></i>
+                        <span>App Store</span>
+                    </a>
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-google-play"></i>
+                        <span>Google Play</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+</html> 

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Press - FinVerse Digital Banking</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .press-hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .press-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .press-hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .press-releases {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .press-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .press-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .press-header h2 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .press-card {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .press-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .press-card .date {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .press-card h3 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .press-card p {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .press-card .read-more {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #4f46e5;
+            color: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .press-card .read-more:hover {
+            background: #4338ca;
+        }
+
+        .media-kit {
+            padding: 5rem 2rem;
+            background: #f9fafb;
+        }
+
+        .media-kit-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .media-kit-header h2 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .media-kit-header p {
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .media-kit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .media-kit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-kit-card i {
+            font-size: 2.5rem;
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
+
+        .media-kit-card h3 {
+            font-size: 1.25rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .media-kit-card p {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .media-kit-card .download-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #4f46e5;
+            color: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .media-kit-card .download-btn:hover {
+            background: #4338ca;
+        }
+
+        .news-section {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .news-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .news-header h2 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: #f9fafb;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-card-content {
+            padding: 1.5rem;
+        }
+
+        .news-card .source {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-card h3 {
+            font-size: 1.25rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-card p {
+            color: #4b5563;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .news-card .read-more {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .news-card .read-more:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .press-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .press-hero p {
+                font-size: 1.125rem;
+            }
+
+            .press-releases,
+            .media-kit,
+            .news-section {
+                padding: 3rem 1rem;
+            }
+
+            .press-grid,
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <div class="logo-container">
+                <div class="logo">FinVerse</div>
+            </div>
+            <nav class="landing-nav">
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#benefits">Benefits</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="./pages/login/login.html" class="btn btn-login">Login</a>
+                <a href="./pages/register/register.html" class="btn btn-register">Register</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <section class="press-hero">
+            <h1>Press Room</h1>
+            <p>Latest news, press releases, and media resources from FinVerse</p>
+        </section>
+
+        <section class="press-releases">
+            <div class="press-container">
+                <div class="press-header">
+                    <h2>Latest Press Releases</h2>
+                </div>
+                <div class="press-grid">
+                    <div class="press-card">
+                        <div class="date">March 15, 2024</div>
+                        <h3>FinVerse Launches New Mobile Banking Features</h3>
+                        <p>FinVerse introduces innovative mobile banking features to enhance customer experience and security.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                    <div class="press-card">
+                        <div class="date">March 1, 2024</div>
+                        <h3>FinVerse Expands to European Market</h3>
+                        <p>Digital banking platform FinVerse announces expansion into key European markets.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                    <div class="press-card">
+                        <div class="date">February 15, 2024</div>
+                        <h3>FinVerse Raises $50M in Series B Funding</h3>
+                        <p>FinVerse secures significant funding to accelerate growth and innovation in digital banking.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="media-kit">
+            <div class="media-kit-container">
+                <div class="media-kit-header">
+                    <h2>Media Kit</h2>
+                    <p>Download our brand assets and media resources</p>
+                </div>
+                <div class="media-kit-grid">
+                    <div class="media-kit-card">
+                        <i class="fas fa-image"></i>
+                        <h3>Brand Assets</h3>
+                        <p>Download our logo, brand guidelines, and visual assets.</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    <div class="media-kit-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Company Fact Sheet</h3>
+                        <p>Key information about FinVerse, our mission, and achievements.</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    <div class="media-kit-card">
+                        <i class="fas fa-camera"></i>
+                        <h3>Press Photos</h3>
+                        <p>High-resolution images of our team, offices, and products.</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="news-section">
+            <div class="news-container">
+                <div class="news-header">
+                    <h2>In the News</h2>
+                </div>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="Tech News">
+                        <div class="news-card-content">
+                            <div class="source">TechCrunch</div>
+                            <h3>FinVerse Revolutionizes Digital Banking</h3>
+                            <p>How FinVerse is transforming the banking industry with innovative solutions.</p>
+                            <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1559526324-593bc073d938" alt="Finance News">
+                        <div class="news-card-content">
+                            <div class="source">Financial Times</div>
+                            <h3>The Future of Banking is Digital</h3>
+                            <p>FinVerse leads the way in digital banking innovation and customer experience.</p>
+                            <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978" alt="Innovation News">
+                        <div class="news-card-content">
+                            <div class="source">Forbes</div>
+                            <h3>FinTech Innovation Award Winner</h3>
+                            <p>FinVerse recognized for groundbreaking achievements in financial technology.</p>
+                            <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="landing-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">FinVerse</div>
+                    <p>Banking for the digital age</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="careers.html">Careers</a></li>
+                            <li><a href="press.html">Press</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="#">Accounts</a></li>
+                            <li><a href="#">Cards</a></li>
+                            <li><a href="#">Loans</a></li>
+                            <li><a href="#">Investments</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Security</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Community</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                            <li><a href="#">Compliance</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 FinVerse. All rights reserved.</p>
+                <div class="app-downloads">
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-apple"></i>
+                        <span>App Store</span>
+                    </a>
+                    <a href="#" class="app-download-btn">
+                        <i class="fab fa-google-play"></i>
+                        <span>Google Play</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+</html> 
