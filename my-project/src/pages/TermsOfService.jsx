@@ -1,149 +1,140 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaFileContract, FaUserCheck, FaMoneyBillWave, FaShieldAlt, FaExclamationTriangle, FaSync } from 'react-icons/fa';
+import { FaFileContract, FaUserCheck, FaShieldAlt, FaGavel, FaExclamationTriangle, FaEnvelope } from 'react-icons/fa';
 
 const TermsOfService = () => {
   const sections = [
     {
       icon: <FaFileContract className="text-2xl text-blue-600" />,
-      title: "Acceptance of Terms",
+      title: "Agreement to Terms",
       content: [
         {
-          subtitle: "Agreement to Terms",
+          subtitle: "Acceptance",
           items: [
-            "By accessing or using our services, you agree to be bound by these Terms",
-            "You must be at least 18 years old to use our services",
-            "You must have the legal capacity to enter into binding contracts",
-            "You must comply with all applicable laws and regulations"
+            "By accessing our services, you agree to these terms",
+            "You must be at least 18 years old",
+            "You must have legal capacity to enter into contracts",
+            "You must provide accurate information"
           ]
         },
         {
           subtitle: "Changes to Terms",
           items: [
-            "We may modify these Terms at any time",
-            "Continued use of services after changes constitutes acceptance",
-            "We will notify you of significant changes",
-            "You can review the current Terms at any time"
+            "We may modify these terms at any time",
+            "Changes will be effective upon posting",
+            "Continued use implies acceptance",
+            "Material changes will be notified"
           ]
         }
       ]
     },
     {
       icon: <FaUserCheck className="text-2xl text-blue-600" />,
-      title: "Account Registration",
+      title: "Account Responsibilities",
       content: [
         {
-          subtitle: "Account Requirements",
+          subtitle: "Account Security",
           items: [
-            "Provide accurate and complete information",
-            "Maintain the security of your account credentials",
-            "Notify us immediately of any unauthorized access",
-            "Keep your contact information up to date"
+            "Maintain confidentiality of credentials",
+            "Notify us of unauthorized access",
+            "Use strong passwords",
+            "Enable two-factor authentication"
           ]
         },
         {
-          subtitle: "Account Restrictions",
+          subtitle: "Account Usage",
           items: [
-            "One account per individual",
-            "No sharing of account credentials",
-            "No automated account creation",
-            "No impersonation of others"
-          ]
-        }
-      ]
-    },
-    {
-      icon: <FaMoneyBillWave className="text-2xl text-blue-600" />,
-      title: "Services and Fees",
-      content: [
-        {
-          subtitle: "Service Description",
-          items: [
-            "Online banking and financial services",
-            "Mobile banking applications",
-            "Payment processing services",
-            "Financial management tools"
-          ]
-        },
-        {
-          subtitle: "Fee Structure",
-          items: [
-            "Transaction fees and service charges",
-            "Account maintenance fees",
-            "Overdraft and penalty fees",
-            "Third-party service fees"
+            "Use services for lawful purposes",
+            "Maintain accurate information",
+            "Comply with all applicable laws",
+            "Report suspicious activity"
           ]
         }
       ]
     },
     {
       icon: <FaShieldAlt className="text-2xl text-blue-600" />,
-      title: "User Responsibilities",
+      title: "Service Usage",
       content: [
         {
-          subtitle: "Security Obligations",
+          subtitle: "Permitted Activities",
           items: [
-            "Protect your account credentials",
-            "Use secure devices and networks",
-            "Report suspicious activity",
-            "Maintain updated security software"
+            "Personal banking transactions",
+            "Bill payments",
+            "Money transfers",
+            "Account management"
           ]
         },
         {
           subtitle: "Prohibited Activities",
           items: [
-            "No fraudulent transactions",
-            "No unauthorized access attempts",
-            "No service interference",
-            "No violation of laws or regulations"
+            "Fraudulent transactions",
+            "Money laundering",
+            "Unauthorized access",
+            "Service disruption"
+          ]
+        }
+      ]
+    },
+    {
+      icon: <FaGavel className="text-2xl text-blue-600" />,
+      title: "Legal Compliance",
+      content: [
+        {
+          subtitle: "Regulatory Requirements",
+          items: [
+            "Anti-money laundering laws",
+            "Know Your Customer (KYC) rules",
+            "Data protection regulations",
+            "Financial services laws"
+          ]
+        },
+        {
+          subtitle: "Enforcement",
+          items: [
+            "Right to investigate violations",
+            "Account suspension or termination",
+            "Legal action for breaches",
+            "Reporting to authorities"
           ]
         }
       ]
     },
     {
       icon: <FaExclamationTriangle className="text-2xl text-blue-600" />,
-      title: "Limitation of Liability",
+      title: "Limitations of Liability",
       content: [
         {
           subtitle: "Service Limitations",
           items: [
             "No guarantee of uninterrupted service",
-            "No liability for third-party actions",
-            "No responsibility for lost profits",
-            "Limited liability for indirect damages"
+            "Technical issues may occur",
+            "Third-party service dependencies",
+            "Force majeure events"
           ]
         },
         {
-          subtitle: "Indemnification",
+          subtitle: "Liability Exclusions",
           items: [
-            "You agree to indemnify us",
-            "Cover legal costs and damages",
-            "Defend against third-party claims",
-            "Protect our intellectual property"
+            "Indirect or consequential damages",
+            "Lost profits or data",
+            "Service interruptions",
+            "Third-party actions"
           ]
         }
       ]
     },
     {
-      icon: <FaSync className="text-2xl text-blue-600" />,
-      title: "Termination and Suspension",
+      icon: <FaEnvelope className="text-2xl text-blue-600" />,
+      title: "Contact Information",
       content: [
         {
-          subtitle: "Account Termination",
+          subtitle: "Legal Inquiries",
           items: [
-            "We may terminate accounts for violations",
-            "You may close your account at any time",
-            "Termination may affect access to services",
-            "Outstanding obligations remain after termination"
-          ]
-        },
-        {
-          subtitle: "Service Suspension",
-          items: [
-            "Temporary suspension for investigation",
-            "Suspension for security concerns",
-            "Suspension for policy violations",
-            "Notice of suspension when possible"
+            "Email: legal@finverse.com",
+            "Phone: +1 (555) 123-4567",
+            "Hours: Monday - Friday, 9:00 AM - 5:00 PM EST",
+            "Address: 123 Financial Street, Banking City, BC 12345"
           ]
         }
       ]
@@ -158,7 +149,7 @@ const TermsOfService = () => {
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Terms of Service</h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Please read these terms carefully before using our banking services.
+              Please read these terms carefully before using our services.
             </p>
           </div>
         </div>
@@ -208,30 +199,6 @@ const TermsOfService = () => {
           </div>
         </div>
       </div>
-
-      {/* Footer CTA */}
-      <section className="bg-gray-50 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Need More Information?</h2>
-          <p className="text-gray-600 mb-8">
-            Visit our Help Center or contact our support team for assistance.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link
-              to="/help-center"
-              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-            >
-              Visit Help Center
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-            >
-              Contact Support
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

@@ -1,8 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaShieldAlt, FaBolt, FaChartLine, FaMobileAlt, FaCreditCard, FaHeadset, FaCheckCircle, FaMapMarkerAlt, FaPhone, FaEnvelope, FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Layout from '../components/Layout';
 
 const Home = () => {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  const testimonials = [
+    {
+      content: "FinVerse has completely transformed how I manage my finances. The interface is intuitive, and the insights have helped me save more than ever before.",
+      name: "Sarah Johnson",
+      role: "Small Business Owner",
+      avatar: "https://img.freepik.com/free-photo/portrait-smiling-businesswoman_23-2147965685.jpg"
+    },
+    {
+      content: "The instant transfers and bill payment reminders have saved me from late fees countless times. FinVerse is truly banking made simple!",
+      name: "Michael Chen",
+      role: "Software Engineer",
+      avatar: "https://img.freepik.com/free-photo/portrait-smiling-male-executive_23-2147965684.jpg"
+    },
+    {
+      content: "As someone who travels frequently, having access to my accounts securely from anywhere in the world has been a game-changer. Highly recommend!",
+      name: "Priya Sharma",
+      role: "Travel Blogger",
+      avatar: "https://img.freepik.com/free-photo/portrait-smiling-female-executive_23-2147965686.jpg"
+    }
+  ];
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -59,13 +91,44 @@ const Home = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
+            {[
+              {
+                icon: <FaShieldAlt className="w-8 h-8" />,
+                title: "Secure Banking",
+                description: "Bank with confidence knowing your data is protected with industry-leading security measures."
+              },
+              {
+                icon: <FaBolt className="w-8 h-8" />,
+                title: "Instant Transfers",
+                description: "Send and receive money instantly, anytime and anywhere with zero waiting time."
+              },
+              {
+                icon: <FaChartLine className="w-8 h-8" />,
+                title: "Financial Insights",
+                description: "Gain valuable insights into your spending habits and financial health."
+              },
+              {
+                icon: <FaMobileAlt className="w-8 h-8" />,
+                title: "Mobile Banking",
+                description: "Access all banking features on the go with our responsive mobile platform."
+              },
+              {
+                icon: <FaCreditCard className="w-8 h-8" />,
+                title: "Smart Cards",
+                description: "Manage your cards, set limits, and enable/disable features with a single tap."
+              },
+              {
+                icon: <FaHeadset className="w-8 h-8" />,
+                title: "24/7 Support",
+                description: "Our dedicated support team is available round the clock to assist you."
+              }
+            ].map((feature, index) => (
               <div
                 key={index}
                 className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               >
                 <div className="text-blue-600 text-3xl mb-4">
-                  <i className={feature.icon}></i>
+                  {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-3 text-gray-900">{feature.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{feature.description}</p>
@@ -85,7 +148,14 @@ const Home = () => {
                 <span className="text-blue-600">FinVerse Advantage</span>
               </h2>
               <ul className="space-y-6">
-                {benefits.map((benefit, index) => (
+                {[
+                  "No hidden fees or charges",
+                  "Higher interest rates on savings",
+                  "Personalized financial advice",
+                  "Seamless integration with other financial tools",
+                  "Reward points on every transaction",
+                  "Paperless banking experience"
+                ].map((benefit, index) => (
                   <li key={index} className="flex items-start space-x-4 group">
                     <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-200">
                       <i className="fas fa-check text-blue-600 group-hover:text-white transition-colors duration-200"></i>
@@ -108,6 +178,43 @@ const Home = () => {
                 alt="Mobile Banking Benefits"
                 className="rounded-2xl shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-500"
               />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">What Our Customers Say</h2>
+          <div className="relative max-w-3xl mx-auto">
+            <div className="bg-white p-8 rounded-lg shadow-md">
+              <p className="text-gray-600 mb-6">{testimonials[currentTestimonial].content}</p>
+              <div className="flex items-center">
+                <img
+                  src={testimonials[currentTestimonial].avatar}
+                  alt={testimonials[currentTestimonial].name}
+                  className="w-12 h-12 rounded-full mr-4"
+                />
+                <div>
+                  <h4 className="font-semibold">{testimonials[currentTestimonial].name}</h4>
+                  <p className="text-gray-500">{testimonials[currentTestimonial].role}</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center mt-6 space-x-4">
+              <button
+                onClick={prevTestimonial}
+                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+              >
+                <FaChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={nextTestimonial}
+                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+              >
+                <FaChevronRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>
@@ -141,47 +248,5 @@ const Home = () => {
     </Layout>
   );
 };
-
-const features = [
-  {
-    icon: 'fas fa-shield-alt',
-    title: 'Secure Banking',
-    description: 'Bank with confidence knowing your data is protected with industry-leading security measures.',
-  },
-  {
-    icon: 'fas fa-bolt',
-    title: 'Instant Transfers',
-    description: 'Send and receive money instantly, anytime and anywhere with zero waiting time.',
-  },
-  {
-    icon: 'fas fa-chart-line',
-    title: 'Financial Insights',
-    description: 'Gain valuable insights into your spending habits and financial health.',
-  },
-  {
-    icon: 'fas fa-mobile-alt',
-    title: 'Mobile Banking',
-    description: 'Access all banking features on the go with our responsive mobile platform.',
-  },
-  {
-    icon: 'fas fa-credit-card',
-    title: 'Smart Cards',
-    description: 'Manage your cards, set limits, and enable/disable features with a single tap.',
-  },
-  {
-    icon: 'fas fa-headset',
-    title: '24/7 Support',
-    description: 'Our dedicated support team is available round the clock to assist you.',
-  },
-];
-
-const benefits = [
-  'No hidden fees or charges',
-  'Higher interest rates on savings',
-  'Personalized financial advice',
-  'Seamless integration with other financial tools',
-  'Reward points on every transaction',
-  'Paperless banking experience',
-];
 
 export default Home; 

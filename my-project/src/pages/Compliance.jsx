@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaShieldAlt, FaFileAlt, FaUserShield, FaLock, FaHandshake, FaGlobe } from 'react-icons/fa';
+import { FaShieldAlt, FaUserShield, FaGavel, FaLock, FaHistory, FaEnvelope } from 'react-icons/fa';
 
 const Compliance = () => {
   const sections = [
     {
       icon: <FaShieldAlt className="text-2xl text-blue-600" />,
-      title: "Regulatory Compliance",
+      title: "Regulatory Framework",
       content: [
         {
           subtitle: "Banking Regulations",
@@ -18,36 +18,12 @@ const Compliance = () => {
           ]
         },
         {
-          subtitle: "Financial Standards",
+          subtitle: "Data Protection",
           items: [
-            "Fair Lending Laws",
-            "Consumer Financial Protection",
-            "Payment Card Industry (PCI) Standards",
-            "International Banking Regulations"
-          ]
-        }
-      ]
-    },
-    {
-      icon: <FaFileAlt className="text-2xl text-blue-600" />,
-      title: "Documentation & Reporting",
-      content: [
-        {
-          subtitle: "Required Documentation",
-          items: [
-            "Regular regulatory filings",
-            "Compliance monitoring reports",
-            "Risk assessment documentation",
-            "Audit trails and records"
-          ]
-        },
-        {
-          subtitle: "Reporting Procedures",
-          items: [
-            "Incident reporting protocols",
-            "Policy review processes",
-            "Compliance status updates",
-            "Regulatory change management"
+            "General Data Protection Regulation (GDPR)",
+            "California Consumer Privacy Act (CCPA)",
+            "Payment Card Industry (PCI) DSS",
+            "Financial Industry Regulatory Authority (FINRA)"
           ]
         }
       ]
@@ -57,21 +33,45 @@ const Compliance = () => {
       title: "Customer Protection",
       content: [
         {
-          subtitle: "Data Security",
+          subtitle: "Security Measures",
           items: [
-            "Data privacy safeguards",
-            "Fraud prevention systems",
-            "Identity verification protocols",
-            "Secure transaction monitoring"
+            "Multi-factor authentication",
+            "Encryption protocols",
+            "Secure data storage",
+            "Regular security audits"
           ]
         },
         {
-          subtitle: "Customer Rights",
+          subtitle: "Privacy Controls",
           items: [
-            "Dispute resolution procedures",
-            "Complaint handling process",
-            "Customer data access rights",
-            "Privacy protection measures"
+            "Data minimization",
+            "Access controls",
+            "Privacy by design",
+            "Regular privacy assessments"
+          ]
+        }
+      ]
+    },
+    {
+      icon: <FaGavel className="text-2xl text-blue-600" />,
+      title: "Legal Compliance",
+      content: [
+        {
+          subtitle: "Regulatory Reporting",
+          items: [
+            "Suspicious Activity Reports (SARs)",
+            "Currency Transaction Reports (CTRs)",
+            "Annual compliance reviews",
+            "Regulatory filings"
+          ]
+        },
+        {
+          subtitle: "Risk Management",
+          items: [
+            "Risk assessments",
+            "Compliance monitoring",
+            "Internal controls",
+            "Audit trails"
           ]
         }
       ]
@@ -81,69 +81,60 @@ const Compliance = () => {
       title: "Security Standards",
       content: [
         {
-          subtitle: "Certifications",
+          subtitle: "Technical Controls",
           items: [
-            "ISO 27001 certification",
-            "PCI DSS compliance",
-            "SOC 2 Type II",
-            "GDPR compliance"
+            "Network security",
+            "Application security",
+            "Endpoint protection",
+            "Cloud security"
           ]
         },
         {
-          subtitle: "Security Measures",
+          subtitle: "Operational Controls",
           items: [
-            "End-to-end encryption",
-            "Multi-factor authentication",
-            "Regular security audits",
-            "Incident response protocols"
+            "Access management",
+            "Change control",
+            "Incident response",
+            "Disaster recovery"
           ]
         }
       ]
     },
     {
-      icon: <FaHandshake className="text-2xl text-blue-600" />,
-      title: "Business Ethics",
+      icon: <FaHistory className="text-2xl text-blue-600" />,
+      title: "Monitoring and Reporting",
       content: [
         {
-          subtitle: "Ethical Standards",
+          subtitle: "Compliance Monitoring",
           items: [
-            "Code of conduct",
-            "Anti-corruption policies",
-            "Conflict of interest management",
-            "Whistleblower protection"
+            "Transaction monitoring",
+            "Customer due diligence",
+            "Sanctions screening",
+            "Risk-based reviews"
           ]
         },
         {
-          subtitle: "Corporate Responsibility",
+          subtitle: "Reporting Requirements",
           items: [
-            "Environmental sustainability",
-            "Social responsibility",
-            "Ethical business practices",
-            "Community engagement"
+            "Regulatory reporting",
+            "Internal reporting",
+            "Audit reporting",
+            "Compliance metrics"
           ]
         }
       ]
     },
     {
-      icon: <FaGlobe className="text-2xl text-blue-600" />,
-      title: "International Standards",
+      icon: <FaEnvelope className="text-2xl text-blue-600" />,
+      title: "Contact Information",
       content: [
         {
-          subtitle: "Global Compliance",
+          subtitle: "Compliance Inquiries",
           items: [
-            "Basel III requirements",
-            "International Financial Reporting Standards",
-            "Cross-border regulations",
-            "Global data protection"
-          ]
-        },
-        {
-          subtitle: "International Operations",
-          items: [
-            "International sanctions compliance",
-            "Global banking standards",
-            "Cross-border transaction rules",
-            "International tax compliance"
+            "Email: compliance@finverse.com",
+            "Phone: +1 (555) 123-4567",
+            "Hours: Monday - Friday, 9:00 AM - 5:00 PM EST",
+            "Address: 123 Financial Street, Banking City, BC 12345"
           ]
         }
       ]
@@ -156,9 +147,9 @@ const Compliance = () => {
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Compliance & Regulatory Standards</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Compliance</h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Our commitment to maintaining the highest standards of compliance and regulatory adherence.
+              Our commitment to regulatory compliance and security standards.
             </p>
           </div>
         </div>
@@ -197,7 +188,7 @@ const Compliance = () => {
             <div className="mt-12 pt-8 border-t border-gray-200">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Contact Us</h2>
               <p className="text-gray-600 mb-4">
-                For compliance-related inquiries or to report potential compliance issues:
+                If you have any questions about our compliance policies, please contact us:
               </p>
               <div className="space-y-2">
                 <p className="text-gray-600">Email: compliance@finverse.com</p>
