@@ -15,7 +15,7 @@ import { debounce } from 'lodash';
 
 // API Keys
 const ALPHA_VANTAGE_API_KEY = 'PJPBZEYY0OKFRJCG';
-const FINNHUB_API_KEY = 'd0pfkopr01qr8ds3e840d0pfkopr01qr8ds3e84g';
+const FINNHUB_API_KEY = 'd1a5mj9r01qltimvc2j0d1a5mj9r01qltimvc2jg';
 
 // Sample stocks data
 const SAMPLE_STOCKS = [

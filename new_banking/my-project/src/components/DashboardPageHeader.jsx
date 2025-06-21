@@ -84,6 +84,17 @@ const DashboardPageHeader = () => {
       type: 'investment'
     }
   ]);
+  const [showNotificationSettings, setShowNotificationSettings] = useState(false);
+  const [notificationPrefs, setNotificationPrefs] = useState(() => {
+    const saved = localStorage.getItem('notificationPrefs');
+    return saved ? JSON.parse(saved) : {
+      transaction: true,
+      security: true,
+      account: true,
+      payment: true,
+      investment: true,
+    };
+  });
   const searchRef = useRef(null);
   const inputRef = useRef(null);
   const searchTimeoutRef = useRef(null);
@@ -238,6 +249,12 @@ const DashboardPageHeader = () => {
         item.title.toLowerCase().includes(query.toLowerCase())
       );
       setSearchResults(results);
+      // Store recent search if not duplicate and not empty
+      if (query.trim() && (!recentSearches.length || recentSearches[0] !== query.trim())) {
+        const updated = [query.trim(), ...recentSearches.filter(q => q !== query.trim())].slice(0, 5);
+        setRecentSearches(updated);
+        localStorage.setItem('recentSearches', JSON.stringify(updated));
+      }
     } else {
       setSearchResults([]);
     }
@@ -270,12 +287,65 @@ const DashboardPageHeader = () => {
     );
   };
 
-  const handleNotificationSettings = () => {
-    // In a real app, this would open a settings modal or navigate to settings page
-    console.log('Opening notification settings...');
+  // Notification Actions
+  const handleArchive = (id) => {
+    setNotifications(prev => prev.filter(n => n.id !== id));
   };
+  const handleDelete = (id) => {
+    setNotifications(prev => prev.filter(n => n.id !== id));
+  };
+  // Notification Settings
+  const handleTogglePref = (type) => {
+    setNotificationPrefs(prev => {
+      const updated = { ...prev, [type]: !prev[type] };
+      localStorage.setItem('notificationPrefs', JSON.stringify(updated));
+      return updated;
+    });
+  };
+  // Notification Sound
+  useEffect(() => {
+    if (notifications.some(n => !n.read && n.important)) {
+      // Try to play custom sound, else fallback to beep
+      const customSoundUrl = '/src/assets/notification.mp3';
+      fetch(customSoundUrl, { method: 'HEAD' })
+        .then(res => {
+          if (res.ok) {
+            const audio = new Audio(customSoundUrl);
+            audio.play();
+          } else {
+            // fallback beep
+            try {
+              const ctx = new (window.AudioContext || window.webkitAudioContext)();
+              const o = ctx.createOscillator();
+              o.type = 'sine';
+              o.frequency.value = 880;
+              o.connect(ctx.destination);
+              o.start();
+              setTimeout(() => { o.stop(); ctx.close(); }, 150);
+            } catch {
+              // Ignore fallback beep failure
+            }
+          }
+        })
+        .catch(() => {
+          // fallback beep
+          try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const o = ctx.createOscillator();
+            o.type = 'sine';
+            o.frequency.value = 880;
+            o.connect(ctx.destination);
+            o.start();
+            setTimeout(() => { o.stop(); ctx.close(); }, 150);
+          } catch {
+            // Ignore fallback beep failure
+          }
+        });
+    }
+  }, [notifications]);
 
   const filteredNotifications = notifications.filter(notification => {
+    if (!notificationPrefs[notification.type]) return false;
     switch (activeNotificationTab) {
       case 'unread':
         return !notification.read;
@@ -306,6 +376,57 @@ const DashboardPageHeader = () => {
     setSearchQuery('');
     setSearchResults([]);
     setSelectedIndex(-1);
+  };
+
+  // --- 1. Add new state for recent searches, notification pagination, pinned quick links, and logout modal ---
+  const [recentSearches, setRecentSearches] = useState(() => {
+    const saved = localStorage.getItem('recentSearches');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [notificationPage, setNotificationPage] = useState(1);
+  const NOTIFICATIONS_PER_PAGE = 5;
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [pinnedQuickLinks, setPinnedQuickLinks] = useState(() => {
+    const saved = localStorage.getItem('pinnedQuickLinks');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // --- 2. Notification Pagination ---
+  const paginatedNotifications = filteredNotifications.slice(
+    (notificationPage - 1) * NOTIFICATIONS_PER_PAGE,
+    notificationPage * NOTIFICATIONS_PER_PAGE
+  );
+  const totalNotificationPages = Math.ceil(filteredNotifications.length / NOTIFICATIONS_PER_PAGE);
+  useEffect(() => {
+    // Reset to first page if filter changes
+    setNotificationPage(1);
+  }, [activeNotificationTab, filteredNotifications.length]);
+
+  // --- 3. Customizable Quick Links ---
+  const allQuickLinks = [
+    ...pinnedQuickLinks.map(name => quickLinks.find(q => q.name === name)).filter(Boolean),
+    ...quickLinks.filter(q => !pinnedQuickLinks.includes(q.name)),
+  ];
+  const handlePinQuickLink = (name) => {
+    if (!pinnedQuickLinks.includes(name)) {
+      const updated = [name, ...pinnedQuickLinks].slice(0, 4);
+      setPinnedQuickLinks(updated);
+      localStorage.setItem('pinnedQuickLinks', JSON.stringify(updated));
+    }
+  };
+  const handleUnpinQuickLink = (name) => {
+    const updated = pinnedQuickLinks.filter(q => q !== name);
+    setPinnedQuickLinks(updated);
+    localStorage.setItem('pinnedQuickLinks', JSON.stringify(updated));
+  };
+
+  // --- 4. Logout Confirmation Handler ---
+  const handleLogout = async () => {
+    setShowLogoutModal(false);
+    const result = await logout();
+    if (result.success) {
+      navigate('/login');
+    }
   };
 
   return (
@@ -576,6 +697,18 @@ const DashboardPageHeader = () => {
                   </div>
                 </Link>
                 <Link
+                  to="/dashboard/investments/crypto"
+                  className="flex items-start px-4 py-3 hover:bg-gray-50"
+                >
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                    <FaCoins />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-gray-900 text-left">Cryptocurrency</p>
+                    <p className="text-xs text-gray-500 text-left">Manage your crypto investments</p>
+                  </div>
+                </Link>
+                <Link
                   to="/dashboard/investments/gold-bonds"
                   className="flex items-start px-4 py-3 hover:bg-gray-50"
                 >
@@ -599,101 +732,84 @@ const DashboardPageHeader = () => {
                 </svg>
               </button>
               <div className="absolute left-0 mt-2 w-72 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                {/* Main Services List */}
-                <div className="px-4 py-2">
-                  <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Services</h3>
-                  <div className="space-y-1">
-                    {/* Insurance Services */}
-                    <div className="relative group/sub">
-                      <button className="w-full flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg">
-                        <FaShieldAlt className="w-4 h-4 mr-2 text-indigo-500" />
-                        Insurance
-                        <svg className="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </button>
-                      {/* Insurance Subcategories */}
-                      <div className="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
-                        <Link to="/dashboard/insurance/health" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          Health Insurance
-                        </Link>
-                        <Link to="/dashboard/insurance/life" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          Life Insurance
-                        </Link>
-                        <Link to="/dashboard/insurance/vehicle" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          Vehicle Insurance
-                        </Link>
-                      </div>
+                {/* Insurance with subcategories */}
+                <div className="relative group/sub">
+                  <button className="flex items-start px-4 py-3 w-full hover:bg-gray-50">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                      <FaShieldAlt />
                     </div>
-
-                    {/* Wealth Management */}
-                    <div className="relative group/sub">
-                      <button className="w-full flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg">
-                        <FaChartLine className="w-4 h-4 mr-2 text-indigo-500" />
-                        Wealth Management
-                        <svg className="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </button>
-                      {/* Wealth Management Subcategories */}
-                      <div className="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
-                        <Link to="/dashboard/wealth/portfolio" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          Portfolio Management
-                        </Link>
-                        <Link to="/dashboard/wealth/retirement" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          Retirement Planning
-                        </Link>
-                        <Link to="/dashboard/wealth/tax" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          Tax Planning
-                        </Link>
-                      </div>
+                    <div className="ml-3 flex-1 text-left">
+                      <p className="text-sm font-medium text-gray-900 text-left">Insurance</p>
+                      <p className="text-xs text-gray-500 text-left">Health, Life, Vehicle</p>
                     </div>
-
-                    {/* Digital Services */}
-                    <div className="relative group/sub">
-                      <button className="w-full flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg">
-                        <FaWallet className="w-4 h-4 mr-2 text-indigo-500" />
-                        Digital Services
-                        <svg className="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </button>
-                      {/* Digital Services Subcategories */}
-                      <div className="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
-                        <Link to="/dashboard/digital/wallet" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          Digital Wallet
-                        </Link>
-                        <Link to="/dashboard/digital/upi" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          UPI Services
-                        </Link>
-                        <Link to="/dashboard/digital/billpay" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          Bill Payments
-                        </Link>
-                      </div>
+                    <svg className="w-4 h-4 ml-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                  <div className="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
+                    <Link to="/dashboard/insurance/health" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Health Insurance</Link>
+                    <Link to="/dashboard/insurance/life" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Life Insurance</Link>
+                    <Link to="/dashboard/insurance/vehicle" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Vehicle Insurance</Link>
+                  </div>
+                </div>
+                {/* Wealth Management with subcategories */}
+                <div className="relative group/sub">
+                  <button className="flex items-start px-4 py-3 w-full hover:bg-gray-50">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                      <FaChartLine />
                     </div>
-
-                    {/* Support Services */}
-                    <div className="relative group/sub">
-                      <button className="w-full flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg">
-                        <FaQuestionCircle className="w-4 h-4 mr-2 text-indigo-500" />
-                        Support
-                        <svg className="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </button>
-                      {/* Support Services Subcategories */}
-                      <div className="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
-                        <Link to="/dashboard/support/help" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          Help Center
-                        </Link>
-                        <Link to="/dashboard/support/contact" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          Contact Us
-                        </Link>
-                        <Link to="/dashboard/support/feedback" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">
-                          Feedback
-                        </Link>
-                      </div>
+                    <div className="ml-3 flex-1 text-left">
+                      <p className="text-sm font-medium text-gray-900 text-left">Wealth Management</p>
+                      <p className="text-xs text-gray-500 text-left">Portfolio, Retirement, Tax</p>
                     </div>
+                    <svg className="w-4 h-4 ml-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                  <div className="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
+                    <Link to="/dashboard/wealth/portfolio" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Portfolio Management</Link>
+                    <Link to="/dashboard/wealth/retirement" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Retirement Planning</Link>
+                    <Link to="/dashboard/wealth/tax" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Tax Planning</Link>
+                  </div>
+                </div>
+                {/* Digital Services with subcategories */}
+                <div className="relative group/sub">
+                  <button className="flex items-start px-4 py-3 w-full hover:bg-gray-50">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                      <FaWallet />
+                    </div>
+                    <div className="ml-3 flex-1 text-left">
+                      <p className="text-sm font-medium text-gray-900 text-left">Digital Services</p>
+                      <p className="text-xs text-gray-500 text-left">Wallet, UPI, BillPay</p>
+                    </div>
+                    <svg className="w-4 h-4 ml-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                  <div className="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
+                    <Link to="/dashboard/digital/wallet" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Digital Wallet</Link>
+                    <Link to="/dashboard/digital/upi" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">UPI Services</Link>
+                    <Link to="/dashboard/digital/billpay" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Bill Payments</Link>
+                  </div>
+                </div>
+                {/* Support with subcategories */}
+                <div className="relative group/sub">
+                  <button className="flex items-start px-4 py-3 w-full hover:bg-gray-50">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                      <FaQuestionCircle />
+                    </div>
+                    <div className="ml-3 flex-1 text-left">
+                      <p className="text-sm font-medium text-gray-900 text-left">Support</p>
+                      <p className="text-xs text-gray-500 text-left">Help, Contact, Feedback</p>
+                    </div>
+                    <svg className="w-4 h-4 ml-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                  <div className="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
+                    <Link to="/dashboard/support/help" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Help Center</Link>
+                    <Link to="/dashboard/support/contact" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Contact Us</Link>
+                    <Link to="/dashboard/support/feedback" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Feedback</Link>
                   </div>
                 </div>
               </div>
@@ -756,6 +872,24 @@ const DashboardPageHeader = () => {
                     </div>
                   </div>
 
+                  {/* Recent Searches */}
+                  {recentSearches.length > 0 && !searchQuery && (
+                    <div className="px-4 py-2 border-b border-gray-100">
+                      <h4 className="text-xs text-gray-500 mb-1">Recent Searches</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {recentSearches.map((q, i) => (
+                          <button
+                            key={q + i}
+                            onClick={() => handleSearch(q)}
+                            className="px-2 py-1 bg-gray-100 hover:bg-indigo-100 text-xs rounded"
+                          >
+                            {q}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Search Results */}
                   <div className="max-h-96 overflow-y-auto">
                     {searchResults.length > 0 ? (
@@ -813,12 +947,12 @@ const DashboardPageHeader = () => {
                     )}
                   </div>
 
-                  {/* Search Categories */}
+                  {/* Quick Links */}
                   {!searchQuery && (
                     <div className="px-4 py-3 border-t border-gray-100 bg-gray-50">
                       <h3 className="text-sm font-medium text-gray-900 mb-3">Quick Links</h3>
                       <div className="grid grid-cols-2 gap-3">
-                        {quickLinks.map((category) => (
+                        {allQuickLinks.map((category) => (
                           <div key={category.name} className="relative group">
                             <button
                               onClick={() => handleQuickLinkClick(category.name)}
@@ -828,6 +962,13 @@ const DashboardPageHeader = () => {
                                 {category.icon}
                               </span>
                               <span>{category.name}</span>
+                            </button>
+                            <button
+                              onClick={() => pinnedQuickLinks.includes(category.name) ? handleUnpinQuickLink(category.name) : handlePinQuickLink(category.name)}
+                              className={`absolute top-1 right-1 text-xs px-1 py-0.5 rounded ${pinnedQuickLinks.includes(category.name) ? 'bg-yellow-200 text-yellow-800' : 'bg-gray-200 text-gray-600'} hover:bg-yellow-300`}
+                              title={pinnedQuickLinks.includes(category.name) ? 'Unpin' : 'Pin'}
+                            >
+                              {pinnedQuickLinks.includes(category.name) ? 'Unpin' : 'Pin'}
                             </button>
                             <div className="absolute left-0 mt-1 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                               {category.items.map((item) => (
@@ -897,7 +1038,7 @@ const DashboardPageHeader = () => {
                         <FaCheckCircle className="w-4 h-4" />
                       </button>
                       <button 
-                        onClick={handleNotificationSettings}
+                        onClick={() => setShowNotificationSettings(true)}
                         className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors duration-200"
                         title="Notification settings"
                       >
@@ -951,8 +1092,8 @@ const DashboardPageHeader = () => {
 
                 {/* Notifications List */}
                 <div className="max-h-96 overflow-y-auto">
-                  {filteredNotifications.length > 0 ? (
-                    filteredNotifications.map((notification) => (
+                  {paginatedNotifications.length > 0 ? (
+                    paginatedNotifications.map((notification) => (
                       <div
                         key={notification.id}
                         className={`px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors duration-200 ${
@@ -998,6 +1139,18 @@ const DashboardPageHeader = () => {
                               >
                                 {notification.important ? 'Remove from important' : 'Mark as important'}
                               </button>
+                              <button
+                                onClick={() => handleArchive(notification.id)}
+                                className="text-xs text-yellow-600 hover:text-yellow-700 font-medium"
+                              >
+                                Archive
+                              </button>
+                              <button
+                                onClick={() => handleDelete(notification.id)}
+                                className="text-xs text-red-600 hover:text-red-700 font-medium"
+                              >
+                                Delete
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -1019,6 +1172,23 @@ const DashboardPageHeader = () => {
                     </div>
                   )}
                 </div>
+
+                {/* Notification Pagination Controls */}
+                {totalNotificationPages > 1 && (
+                  <div className="flex justify-center items-center gap-2 py-2">
+                    <button
+                      onClick={() => setNotificationPage(p => Math.max(1, p - 1))}
+                      disabled={notificationPage === 1}
+                      className="px-2 py-1 text-xs rounded bg-gray-100 hover:bg-indigo-100 disabled:opacity-50"
+                    >Prev</button>
+                    <span className="text-xs text-gray-500">Page {notificationPage} of {totalNotificationPages}</span>
+                    <button
+                      onClick={() => setNotificationPage(p => Math.min(totalNotificationPages, p + 1))}
+                      disabled={notificationPage === totalNotificationPages}
+                      className="px-2 py-1 text-xs rounded bg-gray-100 hover:bg-indigo-100 disabled:opacity-50"
+                    >Next</button>
+                  </div>
+                )}
 
                 {/* Notifications Footer */}
                 <div className="px-4 py-3 border-t border-gray-100 bg-gray-50">
@@ -1045,7 +1215,7 @@ const DashboardPageHeader = () => {
             {/* Profile Dropdown */}
             <div className="relative group">
               <button className="flex items-center space-x-2 p-2 text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center text-white shadow-sm">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center text-white shadow-sm overflow-hidden">
                   {user?.displayName ? user.displayName.charAt(0).toUpperCase() : <FaUser className="w-4 h-4" />}
                 </div>
                 <div className="hidden md:block text-left">
@@ -1058,7 +1228,7 @@ const DashboardPageHeader = () => {
                 {/* Profile Header */}
                 <div className="px-4 py-3 border-b border-gray-100">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center text-white text-lg font-semibold shadow-sm text-left">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center text-white text-lg font-semibold shadow-sm text-left overflow-hidden">
                       {user?.displayName ? user.displayName.charAt(0).toUpperCase() : <FaUser className="w-6 h-6 text-left" />}
                     </div>
                     <div>
@@ -1138,12 +1308,7 @@ const DashboardPageHeader = () => {
                 {/* Sign Out */}
                 <div className="py-1 border-t border-gray-100">
                   <button
-                    onClick={async () => {
-                      const result = await logout();
-                      if (result.success) {
-                        navigate('/login');
-                      }
-                    }}
+                    onClick={() => setShowLogoutModal(true)}
                     className="flex items-center w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200"
                   >
                     <FaSignOutAlt className="w-4 h-4 mr-3" />
@@ -1155,6 +1320,55 @@ const DashboardPageHeader = () => {
           </div>
         </div>
       </div>
+
+      {/* Notification Settings Modal */}
+      {showNotificationSettings && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-96">
+            <h2 className="text-lg font-bold mb-4">Notification Settings</h2>
+            <div className="space-y-3 mb-6">
+              {Object.keys(notificationPrefs).map(type => (
+                <label key={type} className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    checked={notificationPrefs[type]}
+                    onChange={() => handleTogglePref(type)}
+                  />
+                  <span className="capitalize">{type}</span>
+                </label>
+              ))}
+            </div>
+            <div className="flex justify-end">
+              <button
+                onClick={() => setShowNotificationSettings(false)}
+                className="px-4 py-2 text-sm font-medium bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-xl shadow-lg p-6 w-96">
+            <h2 className="text-lg font-bold mb-4">Confirm Logout</h2>
+            <p className="mb-6 text-gray-600">Are you sure you want to sign out?</p>
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setShowLogoutModal(false)}
+                className="px-4 py-2 text-sm font-medium bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+              >Cancel</button>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 text-sm font-medium bg-red-600 text-white rounded-lg hover:bg-red-700"
+              >Logout</button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

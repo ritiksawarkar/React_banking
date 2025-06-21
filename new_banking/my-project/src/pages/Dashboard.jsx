@@ -1542,8 +1542,8 @@ const Dashboard = () => {
 
   const quickActions = [
     { icon: <FaExchangeAlt />, title: 'Transfer', link: '/transfer', color: 'bg-blue-500', description: 'Send money to others' },
-    { icon: <FaCreditCard />, title: 'Cards', link: '/cards', color: 'bg-green-500', description: 'Manage your cards' },
-    { icon: <FaHistory />, title: 'History', link: '/transactions', color: 'bg-purple-500', description: 'View transaction history' },
+    { icon: <FaCreditCard />, title: 'Cards', link: '/dashboard/cards/your-card', color: 'bg-green-500', description: 'Manage your cards' },
+    { icon: <FaHistory />, title: 'History', link: '/dashboard/transactions', color: 'bg-purple-500', description: 'View transaction history' },
     { icon: <FaChartLine />, title: 'Analytics', link: '/analytics', color: 'bg-orange-500', description: 'Track your spending' },
   ];
 
@@ -2141,7 +2141,7 @@ const Dashboard = () => {
               <div className="text-left">
                 <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
               </div>
-              <Link to="/transactions" className="text-indigo-600 hover:text-indigo-700 font-medium text-sm">
+              <Link to="/dashboard/transactions" className="text-indigo-600 hover:text-indigo-700 font-medium text-sm">
                 View all
               </Link>
             </div>

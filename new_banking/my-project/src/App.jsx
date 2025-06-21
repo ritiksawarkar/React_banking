@@ -37,6 +37,13 @@ import EducationLoan from './pages/EducationLoan';
 import BusinessLoan from './pages/BusinessLoan';
 import PortfolioOverview from './pages/PortfolioOverview';
 import MutualFunds from './pages/MutualFunds';
+import Transfer from './pages/Transfer';
+import Analytics from './pages/Analytics';
+import FixedDeposits from './pages/FixedDeposits';
+import RecurringDeposits from './pages/RecurringDeposits';
+import Stocks from './pages/Stocks';
+import GoldBonds from './pages/GoldBonds';
+import Crypto from './pages/Crypto';
 
 import './App.css';
 
@@ -81,6 +88,13 @@ function App() {
           <Route path="/dashboard/loans/business" element={<BusinessLoan />} />
           <Route path="/dashboard/investments/overview" element={<PortfolioOverview />} />
           <Route path="/dashboard/investments/mutual-funds" element={<MutualFunds />} />
+          <Route path="/transfer" element={<Transfer />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/dashboard/investments/fixed-deposits" element={<FixedDeposits />} />
+          <Route path="/dashboard/investments/recurring-deposits" element={<RecurringDeposits />} />
+          <Route path="/dashboard/investments/stocks" element={<Stocks />} />
+          <Route path="/dashboard/investments/gold-bonds" element={<GoldBonds />} />
+          <Route path="/dashboard/investments/crypto" element={<Crypto />} />
         </Routes>
       </Router>
     </AuthProvider>
